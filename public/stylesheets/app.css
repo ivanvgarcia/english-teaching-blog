@@ -1,0 +1,126 @@
+.ui.error.message,
+.ui.success.message {
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    text-align: center;
+    max-width: 500px;
+}
+
+.ui.huge.header {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.ui.card>.content>.header,
+.ui.cards>.card>.content>.header {
+    display: inline;
+}
+
+.ui.huge.message.page.grid {
+    height: 50vh;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background-image: linear-gradient(to bottom, rgba(0, 216, 214, 0.7), rgba(255, 255, 255, 0.7)), url("../img/header.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.ui.huge.message.page.grid h1 {
+    color: white;
+    text-shadow: 2px 2px 3px #272727;
+    margin-bottom: 10px;
+}
+
+.ui.huge.message.page.grid p {
+    color: white;
+    background-color: rgba(39, 39, 39, .8);
+    border-radius: 3px;
+    text-rendering: optimizeLegibility;
+}
+
+
+.ui.grid>.row {
+    padding: 0;
+}
+
+.container.main {
+    margin-top: 4rem;
+}
+
+i.language.icon {
+    font-size: 3rem;
+    color: #00d8d6;
+}
+
+.ui.card:hover {
+    transform: translateY(4px);
+}
+
+.card>.image {
+    max-height: 200px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.content>.meta {
+    margin: 15px 0;
+}
+
+.content>.description {
+    padding: 3px;
+}
+
+.blog-post-btns {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#delete {
+    margin-bottom: 0;
+}
+
+.register-form {
+    margin-top: 100px;
+    max-width: 450px;
+}
+
+.comment-form {
+    display: inline-block;
+}
+
+.comment-btn {
+    border: none;
+    background-color: #fff;
+    font-family: 'Lato', Serif;
+    font-size: 12px;
+    margin-right: 5px;
+    color: rgba(0, 0, 0, .6);
+    cursor: pointer;
+    padding: 1px;
+}
+
+.comment-box {
+    padding-top: 20px;
+}
+
+.comment-btn:hover {
+    color: rgba(0, 0, 0, 1);
+}
+
+.comment-btn:active {
+    background-color: #00d8d6;
+}
+
+.forgot {
+    margin-top: 200px;
+    width: 600px;
+}

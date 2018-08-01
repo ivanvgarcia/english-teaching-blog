@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>Learn English</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+     
+
+    </head>
+    <body>
+      <nav class="ui borderless menu">
+          <div class="ui container">
+              <div class="header item"><i class="language icon"></i>Ivan Sensei</div>
+              <a href="/" class="item">Home</a>
+              <% if(currentUser) { %>
+                <a href="/blogs/new" class="item">New Post</a>
+              <% } %>
+              <div class="right menu">
+                  <% if(!currentUser) { %>
+                      <div class="item">
+                          <a href="/register" class="ui teal button">Sign Up</a>
+                      </div>
+                      <div class="item">
+                          <a href="/login" class="ui button">Login</a>
+                      </div>
+                  <% } else { %>
+                      <div class="item">
+                           <a class="ui teal button">Welcome back <%= currentUser.username %>!</a>
+                      </div>
+                      <div class="item">
+                          <a href="/logout" class="ui button">Logout</a>
+                      </div>
+                  <% } %>
+              </div>
+          </div>
+      </nav>
+      
+      
+      <% if(error && error.length > 0) { %>
+        <div class="ui error message flash-message">
+            <div class="header">
+               <%= error %>
+            </div>
+        </div>
+      <% } %>
+      <% if(success && success.length > 0) { %>
+        <div class="ui success message flash-message">
+            <div class="header">
+               <%= success %>
+            </div>
+        </div>
+      <% } %>
+      
+    
+      
