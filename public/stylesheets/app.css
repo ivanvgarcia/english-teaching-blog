@@ -1,3 +1,11 @@
+body {
+    font-size: 62.5%;
+}
+
+/********************
+FLASH MESSAGES
+********************/
+
 .ui.error.message,
 .ui.success.message {
     margin: auto;
@@ -7,8 +15,15 @@
     z-index: 99;
     text-align: center;
     max-width: 500px;
+    font-size: 1rem;
 }
 
+/********************
+INDEX PAGE 
+********************/
+.ui.container.main {
+    margin-bottom: 4rem;
+}
 .ui.huge.header {
     text-align: center;
     margin-bottom: 70px;
@@ -33,19 +48,27 @@
     background-position: center;
 }
 
-.ui.huge.message.page.grid h1 {
-    color: white;
+.ui.huge.message.page.grid h1,
+.ui.huge.message.page.grid p {
+    color: #fff;
     text-shadow: 2px 2px 3px #272727;
     margin-bottom: 10px;
 }
 
-.ui.huge.message.page.grid p {
-    color: white;
-    background-color: rgba(39, 39, 39, .8);
-    border-radius: 3px;
-    text-rendering: optimizeLegibility;
+.ui.huge.message.page.grid h1 {
+    font-size: 2.3rem;
+    letter-spacing: 1;
 }
 
+.ui.huge.message.page.grid p {
+    font-size: 1.4em;
+    font-weight: 600;
+    letter-spacing: 1;
+}
+
+.ui.message {
+    font-size: 1rem;
+}
 
 .ui.grid>.row {
     padding: 0;
@@ -70,6 +93,14 @@ i.language.icon {
     overflow: hidden;
 }
 
+.content > * {
+    font-size: 1rem;
+}
+
+#post-title {
+    font-size: 1.7rem;
+}
+
 .content>.meta {
     margin: 15px 0;
 }
@@ -91,6 +122,7 @@ i.language.icon {
 .register-form {
     margin-top: 100px;
     max-width: 450px;
+    margin-bottom: 1rem;
 }
 
 .comment-form {
@@ -123,4 +155,49 @@ i.language.icon {
 .forgot {
     margin-top: 200px;
     width: 600px;
+}
+
+.mobile-nav {
+    display: none;
+}
+
+#login-form {
+    margin-bottom: 22.5rem;
+}
+
+@media only screen and (max-width: 700px) {
+    .ui.borderless.menu {
+        display: none;
+    }
+    .ui.grid  {
+        font-size: .5rem;
+        text-align: center;
+    }
+    .mobile-nav {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        margin-bottom: 1rem;
+        background-color: #f2f2f2;
+    }
+
+    .mobile-nav__item {
+        text-align: center;
+    }
+
+    .mobile-nav__item a {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 600;
+        padding: 1em;
+        color: rgb(0, 216, 214);
+        transition: all .2s ease-out;
+    }
+    .mobile-nav__item:hover {
+        background-color: rgb(0, 216, 214);
+        color: #fff;
+    }
+    .mobile-nav__item a:hover {
+        color: #fff;
+    }
 }

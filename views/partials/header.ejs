@@ -37,6 +37,35 @@
           </div>
       </nav>
       
+      <nav class="mobile-nav">
+              <div class="mobile-nav__item">
+                  <a href="/" class="item"><i class="home icon"></i></a>
+              </div>
+              <div class="mobile-nav__item">
+                  <% if(currentUser && currentUser.isAdmin) { %>
+                    <a href="/blogs/new" class="item"><i class="edit icon"></i></a>
+                  <% } %>
+              </div>
+              <% if(!currentUser) { %>
+                  <div class="mobile-nav__item">
+                      <a href="/register" class="item">Sign Up</a>
+                  </div>
+                  <div class="mobile-nav__item">
+                      <a href="/login" class="item">Login</i></a>
+                  </div>
+              <% } else { %>
+                  <div class="mobile-nav__item">
+                      <a href="/users/currentUser.id" class="item"><i class="user circle icon"></i></a>
+                  </div>
+                  <div class="mobile-nav__item">
+                      <a href="/logout" class="item">Logout</i></a>
+                  </div>
+              <% } %>
+      </nav>
+      
+      
+      
+      
       
       <% if(error && error.length > 0) { %>
         <div class="ui error message flash-message">
