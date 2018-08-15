@@ -6,8 +6,9 @@ var middleware = require("../middleware");
 
 router.get("/blogs/:id/comments/new", middleware.isLoggedIn, function(req, res) {
     Blog.findById(req.params.id, function(err, blog) {
-        if (err) {
-            console.log(err);
+        if (err || !blog) {
+            req.flash("error", 'error when posting comment');
+            res.redirect('back');
         }
         else {
             res.render("comments/new", { blog: blog });
@@ -19,14 +20,13 @@ router.post("/blogs/:id/comments", middleware.isLoggedIn, function(req, res) {
     // look up blog using ID
     Blog.findById(req.params.id, function(err, blog) {
         if (err) {
-            console.log(err);
+            req.flash("error", "Something went wrong");
             res.redirect("/blogs");
         }
         else {
             Comment.create(req.body.comment, function(err, comment) {
                 if (err) {
                     req.flash("error", "Something went wrong");
-                    console.log(err);
                 }
                 else {
                     //add username and id to comment
@@ -46,13 +46,20 @@ router.post("/blogs/:id/comments", middleware.isLoggedIn, function(req, res) {
 
 // COMMENTS EDIT ROUTE
 router.get("/blogs/:id/comments/:comment_id/edit", middleware.checkCommentOwnership, function(req, res) {
-    Comment.findById(req.params.comment_id, function(err, foundComment) {
-        if (err) {
-            res.redirect("back");
+    Blog.findById(req.params.id, function(err, foundBlog) {
+        if(err || !foundBlog) {
+            req.flash("error", "No Blog post found");
+            return res.redirect("back");
         }
-        else {
-            res.render("comments/edit", { blog_id: req.params.id, comment: foundComment });
-        }
+            Comment.findById(req.params.comment_id, function(err, foundComment) {
+            if (err) {
+                req.flash("error", "Something went wrong");
+                res.redirect("back");
+            }
+            else {
+                res.render("comments/edit", { blog_id: req.params.id, comment: foundComment });
+            }
+        });
     });
 });
 
@@ -63,6 +70,7 @@ router.put("/blogs/:id/comments/:comment_id", middleware.checkCommentOwnership, 
             res.redirect("back");
         }
         else {
+            req.flash("success", "Your comment was updated");
             res.redirect("/blogs/" + req.params.id);
         }
     })

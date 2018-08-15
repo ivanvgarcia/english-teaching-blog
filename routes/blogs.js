@@ -40,7 +40,12 @@ router.get("/blogs", function(req, res) {
 
 // NEW ROUTE 
 router.get("/blogs/new", middleware.isLoggedIn, function(req, res) {
-    res.render("posts/new");
+    if (req.user.isAdmin) {
+        res.render("posts/new");
+    } else {
+        req.flash("error", "You don't have posting priviliges");
+        res.redirect("back");
+    }
 });
 
 // CREATE ROUTE
@@ -55,7 +60,7 @@ router.post("/blogs", middleware.isLoggedIn, function(req, res) {
         else {
             newBlog.author.id = req.user._id;
             newBlog.author.username = req.user.username;
-            newBlog.save()
+            newBlog.save();
             res.redirect("/blogs");
         }
     });
@@ -65,8 +70,9 @@ router.post("/blogs", middleware.isLoggedIn, function(req, res) {
 //SHOW ROUTE
 router.get("/blogs/:id", function(req, res) {
     Blog.findById(req.params.id).populate("comments").exec(function(err, foundBlog) {
-        if (err) {
-            res.redirect("/blogs");
+        if (err || !foundBlog) {
+            req.flash('error', 'Blog was not found');
+            res.redirect("back");
         }
         else {
             res.render("posts/show", { blog: foundBlog });

@@ -6,7 +6,7 @@ var middlewareObj = {};
 middlewareObj.checkCommentOwnership = function(req, res, next) {
     if (req.isAuthenticated()) {
         Comment.findById(req.params.comment_id, function(err, foundComment) {
-            if (err) {
+            if (err || !foundComment) {
                 req.flash("error", "There was a problem. Try again.");
                 res.redirect("back");
             }
@@ -31,7 +31,7 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
 middlewareObj.checkBlogOwnership = function(req, res, next) {
     if (req.isAuthenticated()) {
         Blog.findById(req.params.id, function(err, foundBlog) {
-            if (err) {
+            if (err || !foundBlog) {
                 req.flash("error", "Blog post not found");
                 res.redirect("back");
             }

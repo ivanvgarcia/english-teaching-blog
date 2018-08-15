@@ -18,10 +18,14 @@
             <div class="field">
                 <label>Blog Content</label>
                 <textarea required name="blog[body]"></textarea>
+                <script>
+        			CKEDITOR.replace( 'blog[body]' );
+        		</script>
             </div>
             <input class="ui teal big button"type="submit" value="Submit">
         </form>
     </div>
+    
     
     
 
