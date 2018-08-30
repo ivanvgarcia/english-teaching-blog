@@ -297,4 +297,17 @@ MOBILE STYLES
     .mobile-nav__item a:hover {
         background-color: #eaebed;
     }
+    
+    #register-form,
+    #login-form {
+        margin: 0 .1rem;
+    }
+    
+    #card {
+        margin-bottom: 5rem;
+    }
+    
+    .ui.message {
+        font-size: 1rem;
+    }
 }
