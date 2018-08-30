@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Learn English</title>
+        <title>Ivan Sensei - A simple blog for English Language Learners</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css">
         <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -12,7 +12,7 @@
     <body>
       <nav class="ui borderless menu">
           <div class="ui container">
-              <div class="header item"><i class="language icon"></i>Ivan Sensei</div>
+              <div class="header item"><i class="language icon teal"></i>Ivan Sensei</div>
               <a href="/" class="item">Home</a>
               <% if(currentUser && currentUser.isAdmin) { %>
                 <a href="/blogs/new" class="item">New Post</a>
@@ -27,7 +27,7 @@
                       </div>
                   <% } else { %>
                       <div class="item">
-                           <a class="ui teal button">Welcome back <%= currentUser.username %>!</a>
+                           <a class="ui teal button">Welcome back <%= currentUser.firstName %>!</a>
                       </div>
                       <div class="item">
                           <a href="/logout" class="ui button">Logout</a>
@@ -39,33 +39,29 @@
       
       <nav class="mobile-nav">
               <div class="mobile-nav__item">
-                  <a href="/" class="item"><i class="home icon"></i></a>
+                  <a href="/" class="item"><i class="home icon teal"></i></a>
               </div>
               <div class="mobile-nav__item">
                   <% if(currentUser && currentUser.isAdmin) { %>
-                    <a href="/blogs/new" class="item"><i class="edit icon"></i></a>
+                    <a href="/blogs/new" class="item"><i class="edit icon teal"></i></a>
                   <% } %>
               </div>
               <% if(!currentUser) { %>
                   <div class="mobile-nav__item">
-                      <a href="/register" class="item">Sign Up</a>
+                      <a href="/register" class="item ui teal button">Sign Up</a>
                   </div>
                   <div class="mobile-nav__item">
-                      <a href="/login" class="item">Login</i></a>
+                      <a href="/login" class="item ui button">Login</i></a>
                   </div>
               <% } else { %>
                   <div class="mobile-nav__item">
-                      <a href="/users/currentUser.id" class="item"><i class="user circle icon"></i></a>
+                      <a class="ui teal button">Hi <%= currentUser.firstName.substring(0, 6) %>!</a>
                   </div>
                   <div class="mobile-nav__item">
-                      <a href="/logout" class="item">Logout</i></a>
+                      <a href="/logout" class="item ui button">Logout</i></a>
                   </div>
               <% } %>
       </nav>
-      
-      
-      
-      
       
       <% if(error && error.length > 0) { %>
         <div class="ui error message flash-message">

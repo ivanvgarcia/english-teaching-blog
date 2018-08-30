@@ -3,7 +3,7 @@
 <div class="ui grid">
         <div class="row">
             <div class="column padding-reset">
-                <div class="ui huge message page grid">
+                <div id="jumbotron" class="ui huge message page grid">
                     <h1 class="ui huge header">Ivan Sensei's</h1>
                     <p>Simple blog for English Language Learners.</p>
                 </div>
@@ -35,7 +35,7 @@
                                 </a>
                                 <div class="meta">
                                     <span>Created <%= moment(blog.created).fromNow() %></span>
-                                    <a class="ui red tag mini label"><%= blog.level %></a>
+                                    <a class="ui gray tag mini label"><%= blog.level %></a>
                                 </div>
                                 <div class="description">
                                     <p><%- blog.body.substring(0, 100) %>...</p>

@@ -1,11 +1,26 @@
 <% include ../partials/header %>
     
-    <div class="ui equal width grid">
-        <div class="teal column">
-            <img class="ui medium circular image" src="<%= user.avatar %>" alt="user profile image">
-        </div>
-        <div class="column">
-            <h1><%= user.firstName + " " + user.lastName %></h1>
+    <div class="user-profile">
+        <div id="user-card" class="ui card">
+          <div class="image">
+            <img src="<%= user.avatar %>">
+          </div>
+          <div class="content">
+            <a class="header"><%= user.firstName + " " + user.lastName %></a>
+            <div class="meta">
+              <span class="date">English Teacher and Writer</span>
+            </div>
+            <div class="description">
+                <p>Ivan is a teacher who works in Tokyo teaching students English to students working in local and multinational 
+                companies in Japan. He is a also a web developer and writer.</p>
+            </div>
+          </div>
+          <div class="extra content">
+            <a>
+              <i class="user icon"></i>
+              1 post
+            </a>
+          </div>
         </div>
     </div>
     
