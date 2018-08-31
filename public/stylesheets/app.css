@@ -234,7 +234,7 @@ FOOTER PAGE
 }
 
 #footer i {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
 }
 
 #footer a {
@@ -243,7 +243,11 @@ FOOTER PAGE
 }
 
 #footer-container {
-    margin: 3rem;
+    margin: 2rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #009C95;
 }
 
 /********************
@@ -297,17 +301,27 @@ MOBILE STYLES
     .mobile-nav__item a:hover {
         background-color: #eaebed;
     }
-    
+
     #register-form,
     #login-form {
         margin: 0 .1rem;
     }
-    
+
     #card {
         margin-bottom: 5rem;
     }
-    
+
     .ui.message {
         font-size: 1rem;
+    }
+
+    #footer i {
+        font-size: 3.5rem;
+        margin-top: 3rem;
+    }
+    
+    #footer-container {
+        display: flex;
+        flex-direction: column;
     }
 }
