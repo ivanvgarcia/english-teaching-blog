@@ -2,9 +2,9 @@
 
     <div class="ui main text container segment">
         <div class="ui huge header">New Blog</div>
-        <form class="ui form" action="/blogs" method="POST" required>
+        <form class="ui form" action="/blogs" method="POST" enctype="multipart/form-data" required>
             <div class="field">
-                <label>Title</label>
+                <label for="blog[title]">Title</label>
                 <input type="text" name="blog[title]" placeholder="title" required>
             </div>
             <div class="field">
@@ -12,8 +12,8 @@
                 <input type="text" name="blog[level]" placeholder="title" required>
             </div>
             <div class="field">
-                <label>Image</label>
-                <input type="text" name="blog[image]" placeholder="paste image url" required>
+                <label for="image">Image</label>
+                <input type="file" id="image" name="image" accept="image/*" placeholder="paste image url" required>
             </div>
             <div class="field">
                 <label>Blog Content</label>

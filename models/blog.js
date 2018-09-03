@@ -12,6 +12,7 @@ var blogSchema = new mongoose.Schema({
     },
     level: String,
     image: String,
+    imageId: String,
     body: String,
     created: {
         type: Date, 

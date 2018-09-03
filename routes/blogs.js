@@ -2,6 +2,28 @@ var express = require("express");
 var router = express.Router();
 var Blog = require("../models/blog");
 var middleware = require("../middleware");
+var dotenv = require('dotenv').config();
+var multer = require('multer');
+var storage = multer.diskStorage({
+    filename: function(req, file, callback) {
+        callback(null, Date.now() + file.originalname);
+    }
+});
+var imageFilter = function(req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+var upload = multer({ storage: storage, fileFilter: imageFilter });
+
+var cloudinary = require('cloudinary');
+cloudinary.config({
+    cloud_name: 'dnbyfakxk',
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 // RESTFUL ROUTES
 router.get("/", function(req, res) {
@@ -42,28 +64,37 @@ router.get("/blogs", function(req, res) {
 router.get("/blogs/new", middleware.isLoggedIn, function(req, res) {
     if (req.user.isAdmin) {
         res.render("posts/new");
-    } else {
+    }
+    else {
         req.flash("error", "You don't have posting priviliges");
         res.redirect("back");
     }
 });
 
 // CREATE ROUTE
-router.post("/blogs", middleware.isLoggedIn, function(req, res) {
+router.post("/blogs", middleware.isLoggedIn, upload.single('image'), function(req, res) {
     //create blog
-
-    req.body.blog.body = req.sanitize(req.body.blog.body);
-    Blog.create(req.body.blog, function(err, newBlog) {
-        if (err) {
-            res.render("posts/new");
+    cloudinary.v2.uploader.upload(req.file.path, function(error, result) {
+        req.body.blog.image = result.secure_url;
+        req.body.blog.imageId = result.public_id;
+        req.body.author = {
+            id: req.user._id,
+            username: req.user.username
         }
-        else {
-            newBlog.author.id = req.user._id;
-            newBlog.author.username = req.user.username;
-            newBlog.save();
-            res.redirect("/blogs");
-        }
+        req.body.blog.body = req.sanitize(req.body.blog.body);
+        Blog.create(req.body.blog, function(err, newBlog) {
+            if (err) {
+                res.render("posts/new");
+            }
+            else {
+                newBlog.author.id = req.user._id;
+                newBlog.author.username = req.user.username;
+                newBlog.save();
+                res.redirect("/blogs");
+            }
+        });
     });
+
 });
 
 
@@ -88,13 +119,33 @@ router.get("/blogs/:id/edit", middleware.checkBlogOwnership, function(req, res) 
 });
 
 //UPDATE ROUTE
-router.put("/blogs/:id", middleware.checkBlogOwnership, function(req, res) {
+router.put("/blogs/:id", middleware.checkBlogOwnership, upload.single('image'), function(req, res) {
+
     req.body.blog.body = req.sanitize(req.body.blog.body);
-    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog) {
+    Blog.findById(req.params.id, async function(err, updatedBlog) {
+        console.log(updatedBlog);
         if (err) {
-            res.redirect("/blogs");
+            req.flash("error", err.message);
+            res.redirect("back");
         }
         else {
+            if (req.file) {
+                try {
+                    await cloudinary.v2.uploader.destroy(updatedBlog.imageId);
+                    var result = await cloudinary.v2.uploader.upload(req.file.path);
+                    updatedBlog.imageId = result.public_id;
+                    updatedBlog.image = result.secure_url;
+                }
+                catch (err) {
+                    req.flash("error", err.message);
+                    return res.redirect("back");
+                }
+            }
+            updatedBlog.title = req.body.blog.title;
+            updatedBlog.level = req.body.blog.level;
+            updatedBlog.body = req.body.blog.body;
+            updatedBlog.save();
+            req.flash("success", "Successfully Updated!");
             res.redirect("/blogs/" + req.params.id);
         }
     });
@@ -102,15 +153,24 @@ router.put("/blogs/:id", middleware.checkBlogOwnership, function(req, res) {
 
 router.delete("/blogs/:id", middleware.checkBlogOwnership, function(req, res) {
     //destroy blog
-    Blog.findByIdAndRemove(req.params.id, function(err) {
+    Blog.findById(req.params.id, async function(err, blogToDelete) {
         if (err) {
-            res.redirect("/blogs");
+            req.flash("error", err.message);
+            return res.redirect("/blogs");
         }
-        else {
-            //redirect somewhere
+        try {
+            await cloudinary.v2.uploader.destroy(blogToDelete.imageId);
+            blogToDelete.remove();
             req.flash("success", "The blog post has been deleted!");
             res.redirect("/blogs");
         }
+        catch (err) {
+            if (err) {
+                req.flash("error", err.message);
+                return res.redirect("back");
+            }
+        }
+        //redirect somewhere
     });
 });
 

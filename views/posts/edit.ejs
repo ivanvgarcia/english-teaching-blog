@@ -2,7 +2,7 @@
 
     <div class="ui main text container segment">
         <div class="ui huge header">Edit: "<%= blog.title %>"</div>
-        <form class="ui form" action="/blogs/<%= blog._id %>?_method=PUT" method="POST">
+        <form class="ui form" action="/blogs/<%= blog._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
             <div class="field">
                 <label>Title</label>
                 <input type="text" name="blog[title]" placeholder="title" value="<%= blog.title %>" required>
@@ -12,8 +12,8 @@
                 <input type="text" name="blog[level]" placeholder="level" value="<%= blog.level %>" required>
             </div>
             <div class="field">
-                <label>Image</label>
-                <input type="text" name="blog[image]" placeholder="paste image url" value="<%= blog.image %>" required>
+                <label for="image">Image</label>
+                <input type="file" id="image" name="image" accept="image/*">
             </div>
             <div class="field">
                 <label>Blog Content</label>
