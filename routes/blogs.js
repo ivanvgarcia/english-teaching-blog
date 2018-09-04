@@ -80,8 +80,11 @@ router.post("/blogs", middleware.isLoggedIn, upload.single('image'), function(re
         req.body.author = {
             id: req.user._id,
             username: req.user.username
+        };
+        if (!req.user.isAdmin) {
+            req.body.blog.body = req.sanitize(req.body.blog.body);
+            return;
         }
-        req.body.blog.body = req.sanitize(req.body.blog.body);
         Blog.create(req.body.blog, function(err, newBlog) {
             if (err) {
                 res.render("posts/new");
@@ -100,6 +103,7 @@ router.post("/blogs", middleware.isLoggedIn, upload.single('image'), function(re
 
 //SHOW ROUTE
 router.get("/blogs/:id", function(req, res) {
+
     Blog.findById(req.params.id).populate("comments").exec(function(err, foundBlog) {
         if (err || !foundBlog) {
             req.flash('error', 'Blog was not found');
@@ -120,8 +124,10 @@ router.get("/blogs/:id/edit", middleware.checkBlogOwnership, function(req, res) 
 
 //UPDATE ROUTE
 router.put("/blogs/:id", middleware.checkBlogOwnership, upload.single('image'), function(req, res) {
-
-    req.body.blog.body = req.sanitize(req.body.blog.body);
+    if (!req.user.isAdmin) {
+        req.body.blog.body = req.sanitize(req.body.blog.body);
+        return;
+    }
     Blog.findById(req.params.id, async function(err, updatedBlog) {
         console.log(updatedBlog);
         if (err) {

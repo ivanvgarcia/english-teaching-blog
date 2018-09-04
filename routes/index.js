@@ -24,7 +24,7 @@ router.post("/register", function(req, res) {
         email: req.body.email,
         avatar: req.body.avatar
     });
-    if(req.body.adminCode === ADMINPW) {
+    if(req.body.adminCode === process.env.ADMINPW) {
         newUser.isAdmin = true;
     }
     User.register(newUser, req.body.password, function(err, user) {
