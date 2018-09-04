@@ -41,7 +41,7 @@
                       </div>
                   <% } else { %>
                       <div class="item">
-                           <a class="ui teal button">Welcome back <%= currentUser.firstName %>!</a>
+                           <a href="/users/<%= currentUser._id %>" class="ui teal button">Welcome back <%= currentUser.firstName %>!</a>
                       </div>
                       <div class="item">
                           <a href="/logout" class="ui button">Logout</a>
@@ -69,7 +69,7 @@
                   </div>
               <% } else { %>
                   <div class="mobile-nav__item">
-                      <a class="ui teal button">Hi <%= currentUser.firstName.substring(0, 6) %>!</a>
+                      <a href="/users/<%= currentUser._id %>" class="ui teal button"><%= currentUser.firstName.substring(0, 6) %>'s Account</a>
                   </div>
                   <div class="mobile-nav__item">
                       <a href="/logout" class="item ui button">Logout</i></a>

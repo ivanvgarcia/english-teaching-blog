@@ -106,6 +106,24 @@ i.language.icon {
 SHOW PAGE 
 ********************/
 
+#blog-post {
+    margin: 10rem 0;
+}
+
+#blog-post .description {
+    margin: 3rem 0;
+    line-height: 1.2;
+}
+
+#blog-post p {
+    line-height: 1.5;
+}
+
+#blog-post strong {
+    color: #00d8d6;
+    ;
+}
+
 #post-image {
     margin: 0;
     width: 100%;
@@ -203,24 +221,14 @@ USER PAGE
 ********************/
 
 .user-profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10rem 0;
+  
 }
 
 #user-card {
-    font-size: 1rem;
-    width: 40rem;
-    margin: 1rem;
-}
-
-#user-card .description {
-    padding: 0;
-}
-
-#user-card .image {
-    max-height: 40rem;
+    background: #f7f7f7;
+    font-size: 1.4rem;
+    margin: 10rem;
+    padding: 5rem;
 }
 
 
@@ -319,7 +327,7 @@ MOBILE STYLES
         font-size: 3.5rem;
         margin-top: 3rem;
     }
-    
+
     #footer-container {
         display: flex;
         flex-direction: column;

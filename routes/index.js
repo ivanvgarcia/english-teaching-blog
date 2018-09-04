@@ -3,6 +3,7 @@ var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
 var Blog = require("../models/blog");
+var Comment = require("../models/comment");
 var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
@@ -13,61 +14,72 @@ var dotenv = require('dotenv').config();
 //=======================
 
 router.get("/register", function(req, res) {
-    res.render("register");
+  res.render("register");
 });
 
 router.post("/register", function(req, res) {
-    var newUser = new User({
-        username: req.body.username,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        avatar: req.body.avatar
-    });
-    if(req.body.adminCode === process.env.ADMINPW) {
-        newUser.isAdmin = true;
+  var newUser = new User({
+    username: req.body.username,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    avatar: req.body.avatar
+  });
+  if (req.body.adminCode === process.env.ADMINPW) {
+    newUser.isAdmin = true;
+  }
+  User.register(newUser, req.body.password, function(err, user) {
+    if (err) {
+      req.flash("error", err.message);
+      return res.redirect("register");
     }
-    User.register(newUser, req.body.password, function(err, user) {
-        if (err) {
-            req.flash("error", err.message);
-            return res.redirect("register");
-        }
-        passport.authenticate("local")(req, res, function() {
-            req.flash("success", "Let's start learning! " + user.username);
-            res.redirect("/blogs");
-        });
+    passport.authenticate("local")(req, res, function() {
+      req.flash("success", "Let's start learning! " + user.username);
+      res.redirect("/blogs");
     });
+  });
 });
 
 router.get("/login", function(req, res) {
-    res.render("login");
+  res.render("login");
 });
 
-router.post("/login", function(req, res, next) { 
-    passport.authenticate("local", 
-    {
-        successRedirect: "/blogs",
-        failureRedirect: "/login",
-        failureFlash: true,
-        successflash: "Welcome to Ivan's Blog, " + req.body.username + "!"
-    })(req, res);
+router.post("/login", function(req, res, next) {
+  passport.authenticate("local", {
+    successRedirect: "/blogs",
+    failureRedirect: "/login",
+    failureFlash: true,
+    successflash: "Welcome to Ivan's Blog, " + req.body.username + "!"
+  })(req, res);
 });
 
 router.get("/logout", function(req, res) {
-    req.logout();
-    req.flash("success", "You have been logged out!");
-    res.redirect("/blogs");
+  req.logout();
+  req.flash("success", "You have been logged out!");
+  res.redirect("/blogs");
 });
 
 //USER PROFILES
-router.get("/users/:id",function(req, res) {
-    User.findById(req.params.id, function(err, foundUser){
-        if(err){
-            req.flash("error", "Something went wrong.");
-            res.redirect("/");
-        } 
-        res.render("users/show", {user: foundUser});
+router.get("/users/:id", function(req, res) {
+  User.findById(req.params.id, function(err, foundUser) {
+    if (err) {
+      req.flash("error", "Something went wrong.");
+      res.redirect("/");
+    }
+    Blog.find().where('author.id').equals(foundUser._id).exec(function(err, blogPosts) {
+      if (err) {
+        req.flash("error", "Something went wrong.");
+        res.redirect("/");
+      }
+      Comment.find().where('author.id').equals(foundUser.id).exec(function(err, comments) {
+        if (err) {
+          req.flash("error", "Something went wrong.");
+          res.redirect("/");
+        }
+        res.render("users/show", { user: foundUser, blogPosts: blogPosts, comments: comments });
+      });
     });
+  });
 });
 
 // forgot password
@@ -100,7 +112,7 @@ router.post('/forgot', function(req, res, next) {
     },
     function(token, user, done) {
       var smtpTransport = nodemailer.createTransport({
-        service: 'Gmail', 
+        service: 'Gmail',
         auth: {
           user: 'ivangarcia@flowgengo.com',
           pass: process.env.GMAILPW
@@ -133,7 +145,7 @@ router.get('/reset/:token', function(req, res) {
       req.flash('error', 'Password reset token is invalid or has expired.');
       return res.redirect('/forgot');
     }
-    res.render('reset', {token: req.params.token});
+    res.render('reset', { token: req.params.token });
   });
 });
 
@@ -145,7 +157,7 @@ router.post('/reset/:token', function(req, res) {
           req.flash('error', 'Password reset token is invalid or has expired.');
           return res.redirect('back');
         }
-        if(req.body.password === req.body.confirm) {
+        if (req.body.password === req.body.confirm) {
           user.setPassword(req.body.password, function(err) {
             user.resetPasswordToken = undefined;
             user.resetPasswordExpires = undefined;
@@ -156,15 +168,16 @@ router.post('/reset/:token', function(req, res) {
               });
             });
           });
-        } else {
-            req.flash("error", "Passwords do not match.");
-            return res.redirect('back');
+        }
+        else {
+          req.flash("error", "Passwords do not match.");
+          return res.redirect('back');
         }
       });
     },
     function(user, done) {
       var smtpTransport = nodemailer.createTransport({
-        service: 'Gmail', 
+        service: 'Gmail',
         auth: {
           user: 'ivangarcia@flowgengo.com',
           pass: process.env.GMAILPW

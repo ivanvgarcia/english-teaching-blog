@@ -2,7 +2,7 @@
 
     <div id="post-container" class="ui main text container">
         
-        <div class="ui top attached">
+        <div id="blog-post" class="ui top attached">
             <div class="item">
                 <img id="post-image" class="ui centered rounded image" src="<%= blog.image %>">
                 <div class="content post">
@@ -16,9 +16,9 @@
                 </div>
                 <% if(currentUser && blog.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                     <div class="blog-post-btns">
-                        <a class="ui blue basic button" href="/blogs/<%= blog._id %>/edit">Edit</a>
+                        <a class="ui teal small button" href="/blogs/<%= blog._id %>/edit">Edit</a>
                         <form id="delete" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
-                            <button class="ui red basic button">Delete</button>
+                            <button class="ui red small button">Delete</button>
                         </form>
                     </div>
                 <% } %>
@@ -27,7 +27,7 @@
                         <% blog.comments.forEach(function(comment){ %>
                             <div class="comment">
                                 <div class="content">
-                                    <a href="/users/<%= blog.author.id %>" class="author"><%= comment.author.username %></a>
+                                    <a href="/users/<%= currentUser.id %>" class="author"><%= comment.author.username %></a>
                                     <div class="metadata">
                                         <span class="date"><%= moment(comment.created).fromNow() %></span>
                                     </div>
