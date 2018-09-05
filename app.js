@@ -12,6 +12,7 @@ var express             = require("express"),
     Blog                = require("./models/blog"),
     flash               = require("connect-flash"),
     app.locals.moment   = require("moment");
+    enforce             = require("express-sslify");
     
 var commentRoutes = require("./routes/comments"),
     blogRoutes    = require("./routes/blogs"),
@@ -21,6 +22,7 @@ var commentRoutes = require("./routes/comments"),
 var url = process.env.DATABASEURL || "mongodb://localhost/english-teaching-blog";
 mongoose.connect(url);
 app.set("view engine", "ejs");
+app.use(enforce.HTTPS({ trustProtoHeader: true }))
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
