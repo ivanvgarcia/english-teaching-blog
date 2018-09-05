@@ -69,6 +69,7 @@ INDEX PAGE
     font-size: 1.6em;
     font-weight: 300;
     letter-spacing: .5;
+    text-align: center;
 }
 
 
@@ -116,12 +117,12 @@ SHOW PAGE
 }
 
 #blog-post p {
-    line-height: 1.5;
+    line-height: 1.6;
+    font-size: 1.3rem;
 }
 
 #blog-post strong {
     color: #00d8d6;
-    ;
 }
 
 #post-image {
@@ -220,9 +221,7 @@ SHOW PAGE
 USER PAGE 
 ********************/
 
-.user-profile {
-  
-}
+.user-profile {}
 
 #user-card {
     background: #f7f7f7;
