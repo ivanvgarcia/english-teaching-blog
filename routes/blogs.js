@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var sanitizeHtml = require('sanitize-html');
 var Blog = require("../models/blog");
 var middleware = require("../middleware");
 var dotenv = require('dotenv').config();
@@ -82,7 +83,10 @@ router.post("/blogs", middleware.isLoggedIn, upload.single('image'), function(re
             username: req.user.username
         };
         if (!req.user.isAdmin) {
-            req.body.blog.body = req.sanitize(req.body.blog.body);
+            req.body.blog.body = sanitizeHtml(req.body.blog.body, {
+                allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+                allowedIframeHostNames: ['www.youtube.com']
+            });
             return;
         }
         Blog.create(req.body.blog, function(err, newBlog) {
@@ -125,8 +129,10 @@ router.get("/blogs/:id/edit", middleware.checkBlogOwnership, function(req, res) 
 //UPDATE ROUTE
 router.put("/blogs/:id", middleware.checkBlogOwnership, upload.single('image'), function(req, res) {
     if (!req.user.isAdmin) {
-        req.body.blog.body = req.sanitize(req.body.blog.body);
-        return;
+        req.body.blog.body = sanitizeHtml(req.body.blog.body, {
+            allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+            allowedIframeHostNames: ['www.youtube.com']
+        });
     }
     Blog.findById(req.params.id, async function(err, updatedBlog) {
         console.log(updatedBlog);
