@@ -11,11 +11,11 @@
           </div>
           
           <div class="six wide column">
-              <h2 class="ui header teal"><%= user.firstName + " " + user.lastName %></h2>
+              <h2 id="user-name" class="ui header"><%= user.firstName + " " + user.lastName %></h2>
               <% if (user.isAdmin === true) { %>
-                <h3 class="ui dividing header">Teacher and Blogger</h3>
-                  <div class="ui segments">
-                    <h4 class="ui top left teal attached label centered">Check out <%= user.firstName %>'s Posts</h4>
+                <h3 id="user-info" class="ui dividing header">Teacher and Blogger</h3>
+                  <div id="user-content" class="ui segments">
+                    <h4>Check out <%= user.firstName %>'s Posts</h4>
                     <% blogPosts.forEach(function(blogPost) { %>
                         <div class="ui teal segment">
                           <a href="/blogs/<%= blogPost.id %>"><%= blogPost.title %></a>
@@ -23,12 +23,12 @@
                     <% }) %>
                   </div>
               <% } else { %>
-                  <h3 class="ui dividing header">Simply English Learner</h3>
-                  <div class="ui segments">
-                    <h4 class="ui top left teal attached label centered">Check out <%= user.firstName %>'s comments</h4>
+                  <h3 id="user-info" class="ui dividing header">Simply English Learner</h3>
+                  <div id="user-content" class="ui segments">
+                    <h4>Check out <%= user.firstName %>'s Comments</h4>
                     <% comments.forEach(function(comment, i) { %>
                         <div class="ui teal segment">
-                            <%= comment.text %>
+                            <a><%= comment.text %></a>
                         </div>
                     <% }) %>
                   </div>

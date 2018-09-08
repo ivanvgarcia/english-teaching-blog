@@ -35,7 +35,7 @@
                                 </a>
                                 <div class="meta">
                                     <span>Created <%= moment(blog.created).fromNow() %></span>
-                                    <a class="ui blue tag mini label"><%= blog.level %></a>
+                                    <a id="card-label" class="ui blue tag mini label"><%= blog.level %></a>
                                 </div>
                                 <div class="description">
                                     <p><%- blog.body.substring(0, 200) %>...</p>
@@ -43,7 +43,7 @@
                             </div>
                             <div class="extra content">
                                     <div class="ui left floated ">
-                                        <a class="ui teal tiny button" href="/blogs/<%= blog._id %>">
+                                        <a id="btn" class="ui teal medium button" href="/blogs/<%= blog._id %>">
                                         Read More<i class="right chevron icon small"></i>
                                     </a>
                                     </div>

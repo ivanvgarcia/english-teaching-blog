@@ -16,9 +16,9 @@
                 </div>
                 <% if(currentUser && blog.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                     <div class="blog-post-btns">
-                        <a class="ui teal small button" href="/blogs/<%= blog._id %>/edit">Edit</a>
+                        <a id="btn" class="ui teal small button" href="/blogs/<%= blog._id %>/edit">Edit</a>
                         <form id="delete" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
-                            <button class="ui red small button">Delete</button>
+                            <button id="btn" class="ui red small button">Delete</button>
                         </form>
                     </div>
                 <% } %>
@@ -34,7 +34,7 @@
                                     <div class="text">
                                         <p><%= comment.text %></p>
                                     </div>
-                                    <div class="">
+                                    <div>
                                         <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                                             <a class="comment-btn" 
                                             href="/blogs/<%= blog._id %>/comments/<%= comment._id %>/edit">Edit</a>
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                         <% }) %>
-                    <a href="/blogs/<%= blog._id %>/comments/new" class="ui primary submit labeled icon button">
+                    <a id="btn" href="/blogs/<%= blog._id %>/comments/new" class="ui primary submit labeled icon button">
                         <i class="icon edit"></i> Add Comment
                     </a>
                 </div>
