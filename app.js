@@ -1,7 +1,6 @@
 var express             = require("express"),
     bodyParser          = require("body-parser"),
     methodOverride      = require("method-override"),
-    expressSanitizer    = require("express-sanitizer");
     mongoose            = require("mongoose"),
     app                 = express(),
     seedDB              = require("./seeds"),
@@ -11,7 +10,6 @@ var express             = require("express"),
     Comment             = require("./models/comment"),
     Blog                = require("./models/blog"),
     flash               = require("connect-flash"),
-    app.locals.moment   = require("moment");
     enforce             = require("express-sslify");
     
 var commentRoutes = require("./routes/comments"),
@@ -19,6 +17,7 @@ var commentRoutes = require("./routes/comments"),
     indexRoutes    = require("./routes/index");
 
 // APP CONFIG
+app.locals.moment   = require("moment");
 var url = process.env.DATABASEURL || "mongodb://localhost/english-teaching-blog";
 mongoose.connect(url);
 app.set("view engine", "ejs");
@@ -26,7 +25,6 @@ app.use(enforce.HTTPS({ trustProtoHeader: true }))
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-app.use(expressSanitizer());
 app.use(flash());
 //seedDB();
 

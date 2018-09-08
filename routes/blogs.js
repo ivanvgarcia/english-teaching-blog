@@ -84,8 +84,7 @@ router.post("/blogs", middleware.isLoggedIn, upload.single('image'), function(re
         };
         if (!req.user.isAdmin) {
             req.body.blog.body = sanitizeHtml(req.body.blog.body, {
-                allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
-                allowedIframeHostNames: ['www.youtube.com']
+                allowedTags: []
             });
             return;
         }
@@ -130,8 +129,7 @@ router.get("/blogs/:id/edit", middleware.checkBlogOwnership, function(req, res) 
 router.put("/blogs/:id", middleware.checkBlogOwnership, upload.single('image'), function(req, res) {
     if (!req.user.isAdmin) {
         req.body.blog.body = sanitizeHtml(req.body.blog.body, {
-            allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
-            allowedIframeHostNames: ['www.youtube.com']
+            allowedTags: []
         });
     }
     Blog.findById(req.params.id, async function(err, updatedBlog) {

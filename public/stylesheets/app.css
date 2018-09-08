@@ -219,6 +219,20 @@ SHOW PAGE
     font-size: 1.4rem;
 }
 
+#comments h3 {
+    font-size: 1.2rem;
+}
+
+#comment-author {
+   font-size: 1.4rem;
+   text-decoration: underline;
+   color: #00b4ad;
+}
+
+.date {
+    font-size: 1rem;
+}
+
 .comment-form {
     display: inline-block;
 }

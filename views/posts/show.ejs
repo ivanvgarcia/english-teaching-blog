@@ -22,12 +22,12 @@
                         </form>
                     </div>
                 <% } %>
-                <div class="ui comments raised segment container comment-box">
+                <div id="comments" class="ui comments raised segment container comment-box">
                     <h3 class="ui teal ribbon label">Comments</h3>
                         <% blog.comments.forEach(function(comment){ %>
                             <div class="comment">
                                 <div class="content">
-                                    <a href="/users/<%= comment.author.id %>" class="author"><%= comment.author.username %></a>
+                                    <a id="comment-author" href="/users/<%= comment.author.id %>" class="author"><%= comment.author.username %></a>
                                     <div class="metadata">
                                         <span class="date"><%= moment(comment.created).fromNow() %></span>
                                     </div>
