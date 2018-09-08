@@ -27,7 +27,7 @@
                         <% blog.comments.forEach(function(comment){ %>
                             <div class="comment">
                                 <div class="content">
-                                    <a href="/users/<%= currentUser.id %>" class="author"><%= comment.author.username %></a>
+                                    <a href="/users/<%= comment.author.id %>" class="author"><%= comment.author.username %></a>
                                     <div class="metadata">
                                         <span class="date"><%= moment(comment.created).fromNow() %></span>
                                     </div>
