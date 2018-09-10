@@ -18,6 +18,12 @@ body {
     font-size: 1.5rem;
 }
 
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
 /********************
 FLASH MESSAGES
 ********************/
@@ -72,7 +78,7 @@ INDEX PAGE
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     background-image: linear-gradient(to bottom, rgba(0, 216, 214, 0.7), rgba(255, 255, 255, 0.7)), url("../img/header.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -97,6 +103,7 @@ INDEX PAGE
     background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(120, 120, 120, .5));
     letter-spacing: .5;
     text-align: center;
+    width: 50%;
 }
 
 
@@ -205,13 +212,15 @@ SHOW PAGE
     margin-bottom: 0;
 }
 
-#register-form {
-    margin: 4rem 0;
+#register-form,
+#reset-form {
+    margin: 4rem auto;
     max-width: 450px;
     margin-bottom: 1rem;
 }
 
-#register-form .field {
+#register-form .field,
+#reset-form .field{
     font-size: 1.4rem;
 }
 
@@ -347,6 +356,10 @@ MOBILE STYLES
 }
 
 @media only screen and (max-width: 700px) {
+    #jumbotron p {
+        width: 100%;
+        font-size: 1.8rem;
+    }
     .ui.borderless.menu {
         display: none;
     }
