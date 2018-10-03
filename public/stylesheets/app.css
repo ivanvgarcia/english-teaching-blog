@@ -19,13 +19,20 @@ body {
 }
 
 .site {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   min-height: 100vh;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 #site-content {
-    flex: 1;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
 }
 
 /********************
@@ -79,10 +86,22 @@ INDEX PAGE
 #jumbotron {
     height: 50vh;
     border-radius: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 216, 214, 0.7)), to(rgba(255, 255, 255, 0.7))), url("../img/header.jpg");
+    background-image: -webkit-linear-gradient(top, rgba(0, 216, 214, 0.7), rgba(255, 255, 255, 0.7)), url("../img/header.jpg");
+    background-image: -o-linear-gradient(top, rgba(0, 216, 214, 0.7), rgba(255, 255, 255, 0.7)), url("../img/header.jpg");
     background-image: linear-gradient(to bottom, rgba(0, 216, 214, 0.7), rgba(255, 255, 255, 0.7)), url("../img/header.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -104,6 +123,9 @@ INDEX PAGE
 
 #jumbotron p {
     font-size: 2rem;
+    background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, .5)), to(rgba(120, 120, 120, .5)));
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, .5), rgba(120, 120, 120, .5));
+    background: -o-linear-gradient(left, rgba(0, 0, 0, .5), rgba(120, 120, 120, .5));
     background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(120, 120, 120, .5));
     letter-spacing: .5;
     text-align: center;
@@ -128,7 +150,9 @@ i.language.icon {
 }
 
 .ui.card:hover {
-    transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+        -ms-transform: translateY(4px);
+            transform: translateY(4px);
 }
 
 .card>.image {
@@ -207,8 +231,12 @@ SHOW PAGE
 }
 
 .blog-post-btns {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     margin-top: 20px;
 }
 
@@ -292,6 +320,9 @@ USER PAGE
 ********************/
 
 #user-card {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#00b5ad));
+    background-image: -webkit-linear-gradient(top, #ccc, #00b5ad);
+    background-image: -o-linear-gradient(top, #ccc, #00b5ad);
     background-image: linear-gradient(to bottom, #ccc, #00b5ad);
     font-size: 1.4rem;
     margin: 10rem;
@@ -339,9 +370,14 @@ FOOTER PAGE
 
 #footer-container {
     margin: 2rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     color: #009C95;
 }
 
@@ -375,21 +411,30 @@ MOBILE STYLES
         font-size: 1.6rem;
     }
     .mobile-nav {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        justify-content: space-around;
-        align-items: stretch;
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
+        -webkit-box-align: stretch;
+            -ms-flex-align: stretch;
+                align-items: stretch;
         margin-bottom: 1rem;
         border-bottom: #ccc solid 1px;
     }
 
     .mobile-nav__item i {
         font-size: 1.98rem;
-        align-self: center;
+        -ms-flex-item-align: center;
+            -ms-grid-row-align: center;
+            align-self: center;
         margin: 0;
     }
 
     .mobile-nav__item {
-        align-self: center;
+        -ms-flex-item-align: center;
+            -ms-grid-row-align: center;
+            align-self: center;
         line-height: 1;
     }
 
@@ -426,7 +471,12 @@ MOBILE STYLES
     }
 
     #footer-container {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
     }
 }
