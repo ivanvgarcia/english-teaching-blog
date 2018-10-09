@@ -173,6 +173,7 @@ i.language.icon {
     color: #00d8d6;
 }
 
+
 /********************
 SHOW PAGE 
 ********************/
@@ -196,7 +197,7 @@ SHOW PAGE
 }
 
 #post-image {
-    margin: 0;
+    margin: 0 auto;
     width: 100%;
 }
 
@@ -206,16 +207,18 @@ SHOW PAGE
 
 .post-title {
     margin: 0;
+    font-size: 4rem;
 }
 
 .post-author {
-    font-size: 1.2rem;
+    font-size: 1.8rem;
     color: #00d8d6;
     margin: 0;
 }
 
 .post-author:hover {
     color: #00c8d8;
+    text-decoration: underline;
 }
 
 #post-title {

@@ -4,13 +4,12 @@
         
         <div id="blog-post" class="ui top attached">
             <div class="item">
-                <img id="post-image" class="ui centered rounded image" src="<%= blog.image %>">
                 <div class="content post">
-                    <h2 class="post-title"><%= blog.title %></h2>
+                    <h1 class="post-title"><%= blog.title %></h1> <a href="/users/<%= blog.author.id %>" class="post-author">by <%= blog.author.username %></a>
                     <p class="post-date">Created <%= moment(blog.created).fromNow() %></p>
-                    <a href="/users/<%= blog.author.id %>" class="post-author">by <%= blog.author.username %></a>
                 </div>
-                <hr>
+                <img id="post-image" class="ui centered rounded image" src="<%= blog.image %>">
+
                 <div class="description">
                     <p><%- blog.body %></p>
                 </div>
