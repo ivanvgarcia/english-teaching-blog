@@ -1,13 +1,16 @@
 <% include ../partials/header %>
     
-    
-    
     <div class="user-profile">
         <div id="user-card" class="ui grid container centered stackable">
-          <div class="six wide column">
+          <div class="six wide column centered">
             <div class="ui medium circular image">
               <img src="<%= user.avatar %>">
             </div>
+            <% if (currentUser && currentUser.id === user.id) { %>
+              <form id="delete-user-form" action="/users/<%= currentUser._id %>?_method=DELETE" method="POST">
+                <button id="delete-user" class="ui red large button">Delete</button>
+              </form>
+            <% } %>
           </div>
           
           <div class="six wide column">
@@ -22,6 +25,7 @@
                         </div>
                     <% }) %>
                   </div>
+                  
               <% } else { %>
                   <h3 id="user-info" class="ui dividing header">Simply English Learner</h3>
                   <div id="user-content" class="ui segments">

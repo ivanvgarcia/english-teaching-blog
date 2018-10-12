@@ -8,6 +8,7 @@ var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
 var dotenv = require('dotenv').config();
+var middleware = require("../middleware");
 
 //=======================
 // AUTHENTICATON ROUTES
@@ -25,14 +26,22 @@ router.post("/register", function(req, res) {
     email: req.body.email,
     avatar: req.body.avatar
   });
+
   if (req.body.adminCode === process.env.ADMINPW) {
     newUser.isAdmin = true;
   }
+
+  if (req.body.password.length < 6) {
+    req.flash("error", 'Password must be longer than 6 characters');
+    return res.redirect('/register');
+  }
+
   User.register(newUser, req.body.password, function(err, user) {
     if (err) {
       req.flash("error", err.message);
       return res.redirect("register");
     }
+
     passport.authenticate("local")(req, res, function() {
       req.flash("success", "Let's start learning! " + user.username);
       res.redirect("/blogs");
@@ -80,6 +89,13 @@ router.get("/users/:id", function(req, res) {
       });
     });
   });
+});
+
+router.delete('/users/:id', (req, res) => {
+  User.findByIdAndRemove({ _id: req.params.id })
+    .then(() => {
+      res.redirect('/');
+    });
 });
 
 // forgot password
