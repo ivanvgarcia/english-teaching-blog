@@ -4,6 +4,7 @@ html {
 
 body {
     font-size: 1.6rem;
+    font-family: 'Scope One', serif;
 }
 
 .ui.form {
@@ -189,7 +190,7 @@ SHOW PAGE
 
 #blog-post p {
     line-height: 1.6;
-    font-size: 1.6rem;
+    font-size: 2rem;
 }
 
 #blog-post strong {
@@ -570,6 +571,7 @@ LANDING PAGE
 
 .landing__heading {
     font-size: 5rem;
+    font-family: inherit;
     text-align: center;
     z-index: 1;
 }
