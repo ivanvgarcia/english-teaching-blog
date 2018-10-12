@@ -7,12 +7,8 @@ var Comment = require("../models/comment");
 var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
-<<<<<<< HEAD
 var dotenv = require('dotenv').config();
 var middleware = require("../middleware");
-=======
-var dotenv = require("dotenv").config();
->>>>>>> d199a1f905c517519d2bcf42e0345dd6621ab5a9
 
 //=======================
 // AUTHENTICATON ROUTES
@@ -34,19 +30,10 @@ router.post("/register", function(req, res) {
   if (req.body.adminCode === process.env.ADMINPW) {
     newUser.isAdmin = true;
   }
-<<<<<<< HEAD
   if (req.body.password.length < 6) {
     req.flash("error", "Password must be longer than 6 characters");
     return res.redirect("/register");
   }
-=======
-
-  if (req.body.password.length < 6) {
-    req.flash("error", 'Password must be longer than 6 characters');
-    return res.redirect('/register');
-  }
-
->>>>>>> 28f3a6a92dc1b1c6944bff3924482962152c76a9
   User.register(newUser, req.body.password, function(err, user) {
     if (err) {
       req.flash("error", err.message);
