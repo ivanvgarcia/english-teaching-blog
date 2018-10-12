@@ -49,15 +49,15 @@ router.get("/blogs", function(req, res) {
         });
     }
     else {
-        Blog.find({}, function(err, blogs) {
-            if (err) {
+        Blog.find().sort({ created: -1 })
+            .then(blogs => res.render('posts/index', {
+                blogs,
+                currentUser: req.user
+            }))
+            .catch(() => {
                 req.flash("noMatch", "No matches found");
                 res.redirect('back');
-            }
-            else {
-                res.render("posts/index", { blogs: blogs, currentUser: req.user });
-            }
-        });
+            });
     }
 });
 
