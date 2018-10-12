@@ -1,5 +1,6 @@
 var Comment = require("../models/comment");
 var Blog = require("../models/blog");
+var User = require("../models/user");
 
 var middlewareObj = {};
 

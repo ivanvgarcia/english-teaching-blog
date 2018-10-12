@@ -243,8 +243,44 @@ SHOW PAGE
     margin-top: 20px;
 }
 
+.ui.medium.circular.image {
+    width: 100%;
+}
+
 #delete {
     margin-bottom: 0;
+}
+
+#delete-user-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+#delete-user {
+    position: relative;
+    font-size: 1.6rem;
+
+}
+
+#delete-user::after {
+    content: 'Are you sure?';
+    color: white;
+    background: #333;
+    padding: .2rem 1rem;
+    border-radius: 3px;
+    opacity: 0;
+    transition: all .2s ease-out;
+    position: absolute;
+    bottom: -60%;
+    left: -30%;
+    width: 150px;
+    transform: translateY(-100%);
+}
+
+#delete-user:hover::after {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 #register-form,
