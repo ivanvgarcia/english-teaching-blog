@@ -19,7 +19,12 @@ var commentRoutes = require("./routes/comments"),
 // APP CONFIG
 app.locals.moment = require("moment");
 var url = process.env.DATABASEURL || process.env.DEVDATABASE;
-mongoose.connect(url);
+mongoose.connect(
+  url,
+  {
+    useNewUrlParser: true
+  }
+);
 app.set("view engine", "ejs");
 //app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.use(express.static("public"));

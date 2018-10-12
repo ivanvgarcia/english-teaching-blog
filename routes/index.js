@@ -28,6 +28,10 @@ router.post("/register", function(req, res) {
   if (req.body.adminCode === process.env.ADMINPW) {
     newUser.isAdmin = true;
   }
+  if (req.body.password.length < 6) {
+    req.flash("error", "Password must be longer than 6 characters");
+    return res.redirect("/register");
+  }
   User.register(newUser, req.body.password, function(err, user) {
     if (err) {
       req.flash("error", err.message);
@@ -62,33 +66,41 @@ router.get("/logout", function(req, res) {
 //USER PROFILES
 router.get("/users/:id", function(req, res) {
   User.findById(req.params.id, function(err, foundUser) {
-    if (err) {
-      req.flash("error", "Something went wrong.");
-      res.redirect("/");
-    }
-    Blog.find()
-      .where("author.id")
-      .equals(foundUser._id)
-      .exec(function(err, blogPosts) {
-        if (err) {
-          req.flash("error", "Something went wrong.");
-          res.redirect("/");
-        }
-        Comment.find()
-          .where("author.id")
-          .equals(foundUser.id)
-          .exec(function(err, comments) {
-            if (err) {
-              req.flash("error", "Something went wrong.");
-              res.redirect("/");
-            }
-            res.render("users/show", {
-              user: foundUser,
-              blogPosts: blogPosts,
-              comments: comments
+    if (foundUser) {
+      Blog.find()
+        .where("author.id")
+        .equals(foundUser._id)
+        .exec(function(err, blogPosts) {
+          if (err) {
+            req.flash("error", "Something went wrong.");
+            res.redirect("/");
+          }
+          Comment.find()
+            .where("author.id")
+            .equals(foundUser.id)
+            .exec(function(err, comments) {
+              if (err) {
+                req.flash("error", "Something went wrong.");
+                res.redirect("/");
+              }
+              res.render("users/show", {
+                user: foundUser,
+                blogPosts: blogPosts,
+                comments: comments
+              });
             });
-          });
-      });
+        });
+    } else {
+      req.flash("error", "Sorry, this user no longer exists");
+      res.redirect(req.get("referer"));
+    }
+  });
+});
+
+// Delete
+router.delete("/users/:id", (req, res) => {
+  User.findByIdAndRemove({ _id: req.params.id }).then(() => {
+    res.redirect("/");
   });
 });
 

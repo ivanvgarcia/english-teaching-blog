@@ -1,43 +1,52 @@
 <% include ../partials/header %>
-    
-    
-    
-    <div class="user-profile">
-        <div id="user-card" class="ui grid container centered stackable">
-          <div class="six wide column">
-            <div class="ui medium circular image">
-              <img src="<%= user.avatar %>">
-            </div>
-          </div>
-          
-          <div class="six wide column">
-              <h2 id="user-name" class="ui header"><%= user.firstName + " " + user.lastName %></h2>
-              <% if (user.isAdmin === true) { %>
-                <h3 id="user-info" class="ui dividing header">Teacher and Blogger</h3>
-                  <div id="user-content" class="ui segments">
-                    <h4>Check out <%= user.firstName %>'s Posts</h4>
-                    <% blogPosts.forEach(function(blogPost) { %>
-                        <div class="ui teal segment">
-                          <a href="/blogs/<%= blogPost.id %>"><%= blogPost.title %></a>
-                        </div>
-                    <% }) %>
-                  </div>
-              <% } else { %>
-                  <h3 id="user-info" class="ui dividing header">Simply English Learner</h3>
-                  <div id="user-content" class="ui segments">
-                    <h4>Check out <%= user.firstName %>'s Comments</h4>
-                    <% comments.forEach(function(comment, i) { %>
-                        <div class="ui teal segment">
-                            <a><%= comment.text %></a>
-                        </div>
-                    <% }) %>
-                  </div>
-                <% } %>
-              </div>
-          </div>
-        </div>
+
+
+
+<div class="user-profile">
+  <div id="user-card" class="ui grid container centered stackable">
+    <div class="six wide column">
+      <div class="ui medium circular image">
+        <img src="<%= user.avatar %>">
       </div>
-    
-    
+    </div>
+
+    <div class="six wide column">
+      <h2 id="user-name" class="ui header">
+        <%= user.firstName + " " + user.lastName %>
+      </h2>
+      <% if (user.isAdmin === true) { %>
+      <h3 id="user-info" class="ui dividing header">Teacher and Blogger</h3>
+      <div id="user-content" class="ui segments">
+        <h4>Check out
+          <%= user.firstName %>'s Posts</h4>
+        <% blogPosts.forEach(function(blogPost) { %>
+        <div class="ui teal segment">
+          <a href="/blogs/<%= blogPost.id %>">
+            <%= blogPost.title %></a>
+        </div>
+        <% }) %>
+      </div>
+       <form class="comment-form" action="/users/<%= user.id  %>?_method=DELETE" method="POST">
+        <input type="submit" class="comment-btn" value="Delete">
+       </form>
+      <% } else { %>
+      <h3 id="user-info" class="ui dividing header">Simply English Learner</h3>
+      <div id="user-content" class="ui segments">
+        <h4>Check out
+          <%= user.firstName %>'s Comments</h4>
+        <% comments.forEach(function(comment, i) { %>
+        <div class="ui teal segment">
+          <a>
+            <%= comment.text %></a>
+        </div>
+        <% }) %>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+</div>
+
+
 
 <% include ../partials/footer %>
