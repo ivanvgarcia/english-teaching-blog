@@ -191,6 +191,7 @@ SHOW PAGE
 #blog-post p {
     line-height: 1.6;
     font-size: 2rem;
+    font-family: 'Scope One', serif;
 }
 
 #blog-post strong {
@@ -209,12 +210,14 @@ SHOW PAGE
 .post-title {
     margin: 0;
     font-size: 4rem;
+    font-family: 'Scope One', serif;
 }
 
 .post-author {
     font-size: 1.8rem;
     color: #00d8d6;
     margin: 0;
+    font-family: 'Scope One', serif;
 }
 
 .post-author:hover {
@@ -605,7 +608,7 @@ LANDING PAGE
     padding: 1.8rem;
     color: #fff;
     background: rgba(187, 10, 81, 0.986);
-    font-size: 1.9rem;
+    font-size: 1.8rem;
     cursor: pointer;
     overflow: hidden;
     outline: none;
