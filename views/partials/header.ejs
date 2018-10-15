@@ -1,108 +1,109 @@
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="Simply English is a blog created for English Language Learners. The goal is to help English learners improve 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Simply English is a blog created for English Language Learners. The goal is to help English learners improve 
         their reading comprehension through relevant and current topics from around the world.">
-        <meta name="keywords" content="Learn English, Learn English fast, English reading, English blog, Learn English fluently, Learn English vocabulary, Learn English grammar">
-        <meta name="author" content="Ivan Garcia">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Simply English - A blog for English Language Learners</title>
+    <meta name="keywords" content="Learn English, Learn English fast, English reading, English blog, Learn English fluently, Learn English vocabulary, Learn English grammar">
+    <meta name="author" content="Ivan Garcia">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simply English - A blog for English Language Learners</title>
 
 
 
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css">
-        <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
-        
-        <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
-        <script src="//cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124918350-1"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'UA-124918350-1');
-        </script>
-        
+    <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+        crossorigin="anonymous">
 
-    </head>
-    <body class="site">
-            
-<main id="site-content">
-      <nav class="ui borderless menu">
-          <div class="ui container">
-              <div class="header item"><i class="language icon teal"></i>Simply English</div>
-              <a href="/" class="item">Home</a>
-              <% if(currentUser && currentUser.isAdmin) { %>
-                <a href="/blogs/new" class="item">New Post</a>
-              <% } %>
-              <div class="right menu">
-                  <% if(!currentUser) { %>
-                      <div class="item">
-                          <a href="/register" class="ui teal button">Sign Up</a>
-                      </div>
-                      <div class="item">
-                          <a href="/login" class="ui button">Login</a>
-                      </div>
-                  <% } else { %>
-                      <div class="item">
-                           <a href="/users/<%= currentUser._id %>" class="ui teal button">Welcome back <%= currentUser.firstName %>!</a>
-                      </div>
-                      <div class="item">
-                          <a href="/logout" class="ui button">Logout</a>
-                      </div>
-                  <% } %>
-              </div>
-          </div>
-      </nav>
-      
-      <nav class="mobile-nav">
-              <div class="mobile-nav__item">
-                  <a href="/" class="item"><i class="home icon teal"></i></a>
-              </div>
-              <div class="mobile-nav__item">
-                  <% if(currentUser && currentUser.isAdmin) { %>
-                    <a href="/blogs/new" class="item"><i class="edit icon teal"></i></a>
-                  <% } %>
-              </div>
-              <% if(!currentUser) { %>
-                  <div class="mobile-nav__item">
-                      <a href="/register" class="item ui teal button">Sign Up</a>
-                  </div>
-                  <div class="mobile-nav__item">
-                      <a href="/login" class="item ui button">Login</i></a>
-                  </div>
-              <% } else { %>
-                  <div class="mobile-nav__item">
-                      <a href="/users/<%= currentUser._id %>" class="ui teal button"><%= currentUser.firstName.substring(0, 6) %>'s Account</a>
-                  </div>
-                  <div class="mobile-nav__item">
-                      <a href="/logout" class="item ui button">Logout</i></a>
-                  </div>
-              <% } %>
-      </nav>
-      
-      <% if(error && error.length > 0) { %>
-        <div class="ui error message flash-message">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+    <script src="//cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124918350-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-124918350-1');
+    </script>
+
+
+</head>
+
+<body class="site">
+
+    <main id="site-content">
+        <nav class="nav">
+            <ul class="nav__list nav__list--left">
+                <li class="nav__item">
+                    <a href="/" class="">
+
+                        Home
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <% if(currentUser && currentUser.isAdmin) { %>
+                    <a href="/blogs/new" class="">
+
+                        New Post
+                    </a>
+                    <% } %>
+                </li>
+            </ul>
+
+            <div class="nav__logor">
+                <i class="">
+                </i>Simply English
+            </div>
+
+            <ul class="nav__list nav__list--right">
+                <% if(!currentUser) { %>
+                <li class="nav__item">
+                    <a href="/register" class="">
+
+                        Sign Up
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="/login" class="">
+
+                        Login
+                    </a>
+                </li>
+                <% } else { %>
+                <li class="nav__item">
+                    <a href="/users/<%= currentUser._id %>" class="">Welcome back
+                        <%= currentUser.firstName %>!</a>
+                </li>
+                <li class="nav__item">
+                    <a href="/logout" class="">
+
+                        Logout
+                    </a>
+                </li>
+                <% } %>
+            </ul>
+        </nav>
+
+
+        <% if(error && error.length > 0) { %>
+        <div class="error flash-message">
             <div class="header">
-               <%= error %>
+                <%= error %>
             </div>
         </div>
-      <% } %>
-      <% if(success && success.length > 0) { %>
-        <div class="ui success message flash-message">
+        <% } %>
+        <% if(success && success.length > 0) { %>
+        <div class="success flash-message">
             <div class="header">
-               <%= success %>
+                <%= success %>
             </div>
         </div>
-      <% } %>
-      
-      
-
-      
-    
-      
+        <% } %>
