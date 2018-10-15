@@ -7,7 +7,7 @@ var Comment = require("../models/comment");
 var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
-var dotenv = require('dotenv').config();
+var dotenv = require("dotenv").config();
 var middleware = require("../middleware");
 
 //=======================
@@ -102,16 +102,18 @@ router.get("/users/:id", function(req, res) {
 
 // Delete
 router.delete("/users/:id", (req, res) => {
-  User.findByIdAndRemove({ _id: req.params.id }).then(() => {
-    res.redirect("/");
-  });
-});
-
-router.delete('/users/:id', (req, res) => {
-  User.findByIdAndRemove({ _id: req.params.id })
-    .then(() => {
-      res.redirect('/');
+  if (req.user && req.user._id.toString() === req.params.id) {
+    User.findByIdAndRemove({ _id: req.params.id }).then(() => {
+      req.flash(
+        "success",
+        "Your profile has been deleted. Sorry to see you go!"
+      );
+      res.redirect("/");
     });
+  } else {
+    req.flash("error", "You are not authorized to do that");
+    res.redirect("/blogs");
+  }
 });
 
 // forgot password
