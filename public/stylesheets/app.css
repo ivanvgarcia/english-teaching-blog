@@ -254,7 +254,7 @@ NAV PAGE
 .flash-message {
     color: #fff;
     transform: translateX(-100%);
-    width: 40%;
+    width: 20%;
     padding: 1rem;
     animation: slidein 2.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
     text-align: center;
