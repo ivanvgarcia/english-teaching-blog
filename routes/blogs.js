@@ -40,7 +40,7 @@ router.get("/blogs", function(req, res) {
     const regex = new RegExp(escapeRegex(req.query.search), "gi");
     Blog.find({ title: regex }, function(err, searchResults) {
       if (err) {
-        console.log(err);
+        req.flash("error", "Error trying to find your search.");
       } else {
         if (searchResults.length === 0) {
           req.flash(
@@ -92,7 +92,8 @@ router.post("/blogs", middleware.isLoggedIn, upload.single("image"), function(
     req.body.blog.imageId = result.public_id;
     req.body.author = {
       id: req.user._id,
-      username: req.user.username
+      username: req.user.username,
+      avatar: req.user.avatar
     };
     if (!req.user.isAdmin) {
       req.body.blog.body = sanitizeHtml(req.body.blog.body, {
@@ -106,6 +107,7 @@ router.post("/blogs", middleware.isLoggedIn, upload.single("image"), function(
       } else {
         newBlog.author.id = req.user._id;
         newBlog.author.username = req.user.username;
+        newBlog.author.avatar = req.user.avatar;
         newBlog.save();
         res.redirect("/blogs");
       }
@@ -149,7 +151,6 @@ router.put(
       });
     }
     Blog.findById(req.params.id, async function(err, updatedBlog) {
-      console.log(updatedBlog);
       if (err) {
         req.flash("error", err.message);
         res.redirect("back");
@@ -165,6 +166,7 @@ router.put(
             return res.redirect("back");
           }
         }
+        updatedBlog.author.avatar = req.user.avatar;
         updatedBlog.title = req.body.blog.title;
         updatedBlog.level = req.body.blog.level;
         updatedBlog.body = req.body.blog.body;

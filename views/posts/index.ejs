@@ -1,63 +1,70 @@
 <% include ../partials/header %>
 
-<div class="ui grid">
-        <div class="row">
-            <div class="column padding-reset">
-                <div id="jumbotron" class="ui huge message page grid">
-                    <h1 class="ui huge header">Simply English</h1>
-                    <p>A blog for English Language Learners.</p>
+
+<header class="header">
+    <h1 class="header__heading">Simply English</h1>
+    <p class="header__caption">A blog for English Language Learners.</p>
+</header>
+
+
+
+
+<div class="container">
+
+    <div class="">
+        <h2>Recent Posts</h2>
+        <form action="/blogs" method="GET" class="">
+            <div class="">
+                <input type="text" name="search" placeholder="Search blogs posts">
+                <input type="submit" value="Search" class="">
+            </div>
+        </form>
+    </div>
+
+    <div class="cards">
+        <% blogs.forEach(function(blog){ %>
+        <div class="card">
+            <div class="card__head">
+                <img class="card__image" src="<%= blog.image %>">
+                <div class="card__author">
+                    Written By
+                    <img class="card__author-avatar" src="<%= blog.author.avatar %>">
+
+                    <a class="card__author-name" href="/users/<%= blog.author.id %>">
+                        <%= blog.author.username %></a>
                 </div>
             </div>
+            <div class="card__content">
+                <a class="card__title" href="/blogs/<%= blog._id %>">
+                    <%= blog.title %>
+                </a>
+                <div class="">
+                    <span>Created
+                        <%= moment(blog.created).fromNow() %></span>
+                    <a class="">
+                        <%= blog.level %></a>
+                </div>
+                <div class="class">
+                    <p>
+                        <%- blog.body.substring(0, 200) %>...</p>
+                </div>
+            </div>
+
+            <div class="">
+                <div class="">
+                    <a class="" href="/blogs/<%= blog._id %>">
+                        Read More<i class=""></i>
+                    </a>
+                </div>
+
+            </div>
         </div>
+        <% }) %>
+    </div>
+
+
 </div>
 
-<div class="ui container main">
-    <div class="ui huge header">
-        <h2>Recent Posts</h2>
-        <form action="/blogs" method="GET" class="ui form">
-        <div class="inline field">
-            <input type="text" name="search" placeholder="Search blogs posts">
-            <input type="submit" value="Search" class="ui teal button">
-        </div>
-    </form>
-    </div>
-    
-    
-            <div class="ui three stackable cards ">
-                    <% blogs.forEach(function(blog){ %>
-                    <div id="card" class="ui raised card">
-                            <div class="image">
-                                <img src="<%= blog.image %>">
-                            </div>
-                            <div class="content">
-                                <a id="post-title" class="header" href="/blogs/<%= blog._id %>">
-                                    <%= blog.title %>
-                                </a>
-                                <div class="meta">
-                                    <span>Created <%= moment(blog.created).fromNow() %></span>
-                                    <a id="card-label" class="ui blue tag mini label"><%= blog.level %></a>
-                                </div>
-                                <div class="description">
-                                    <p><%- blog.body.substring(0, 200) %>...</p>
-                                </div>
-                            </div>
-                            <div class="extra content">
-                                    <div class="ui left floated ">
-                                        <a id="btn" class="ui teal medium button" href="/blogs/<%= blog._id %>">
-                                        Read More<i class="right chevron icon small"></i>
-                                    </a>
-                                    </div>
-                                    <div class="right floated author">
-                                      <img class="ui avatar image" src="https://ivanvgarcia.com/img/Ivan-min.jpg">
-                                      <a href="/users/<%= blog.author.id %>"><%= blog.author.username %></a>
-                                    </div>
-                            </div>
-                        </div>
-                    <% }) %>
-            </div>
-                
-                
-</div>
 
 
 <% include ../partials/footer %>
