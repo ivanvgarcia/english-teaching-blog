@@ -1,0 +1,62 @@
+.btn:link,
+.btn:visited {
+    position: relative;
+    border: none;
+    padding: 1.8rem;
+    color: #fff;
+    background: rgba(187, 10, 81, 0.986);
+    font-size: 1.8rem;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%) scale(0);
+    transform-origin: 50%;
+    background: rgba(214, 184, 196, 0.986);
+
+
+}
+
+.btn:not(:active)::before {
+    animation: ripple 1s ease-out;
+}
+
+.btn:before {
+    visibility: hidden;
+}
+
+.btn:focus:before {
+    visibility: visible;
+}
+
+.btn:hover {
+    background: rgba(236, 18, 102, 0.986);
+    color: #fff;
+}
+
+.btn:not(:last-of-type) {
+    margin-right: 2rem;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+    }
+
+    20% {
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}

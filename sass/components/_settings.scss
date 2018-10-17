@@ -1,2 +1,26 @@
 $primary-color: #2BBBA3;
+$primary-color-light: #54FFE3;
+$primary-color-dark: #0E6E5E;
 $secondary-color: #6E2203;
+$secondary-color-light: #BB542B;
+$tertiary-color-dark: #b305b6;
+$tertiary-color: #C441C6;
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: 'Poppins', serif;
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+    transition: all .2s ease-out;
+}
+
+a:hover {
+    text-decoration: underline;
+}

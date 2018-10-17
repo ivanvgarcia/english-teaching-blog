@@ -6,12 +6,8 @@
     <p class="header__caption">A blog for English Language Learners.</p>
 </header>
 
-
-
-
-<div class="container">
-
-    <div class="">
+<div class="margin-top-bottom container">
+    <div class="margin-top-bottom post-search">
         <h2>Recent Posts</h2>
         <form action="/blogs" method="GET" class="">
             <div class="">
@@ -25,39 +21,34 @@
         <% blogs.forEach(function(blog){ %>
         <div class="card">
             <div class="card__head">
+                <small class="card__level">
+                    <%= blog.level %>
+                </small>
                 <img class="card__image" src="<%= blog.image %>">
-                <div class="card__author">
-                    Written By
-                    <img class="card__author-avatar" src="<%= blog.author.avatar %>">
-
-                    <a class="card__author-name" href="/users/<%= blog.author.id %>">
-                        <%= blog.author.username %></a>
-                </div>
+                <a class="card__button" href="/blogs/<%= blog._id %>">
+                    Read More<i class=""></i>
+                </a>
             </div>
             <div class="card__content">
-                <a class="card__title" href="/blogs/<%= blog._id %>">
-                    <%= blog.title %>
-                </a>
-                <div class="">
-                    <span>Created
-                        <%= moment(blog.created).fromNow() %></span>
-                    <a class="">
-                        <%= blog.level %></a>
-                </div>
-                <div class="class">
-                    <p>
-                        <%- blog.body.substring(0, 200) %>...</p>
-                </div>
-            </div>
-
-            <div class="">
-                <div class="">
-                    <a class="" href="/blogs/<%= blog._id %>">
-                        Read More<i class=""></i>
+                <div class="card__title">
+                    <a class="card__title-link" href="/blogs/<%= blog._id %>">
+                        <%= blog.title %>
                     </a>
+                    <small class="card__date">Posted on
+                        <%= moment(blog.created).format("MMMM Do, YYYY") %>
+                    </small>
                 </div>
-
+                <div class="card__body">
+                    <%- blog.body.substring(0, 200) %>...
+                </div>
             </div>
+            <div class="card__author">
+                <img class="card__author-avatar" alt="photo of author" src="<%= blog.author.avatar %>">
+                <a class="card__author-name" href="/users/<%= blog.author.id %>">
+                    <%= blog.author.username %>
+                </a>
+            </div>
+
         </div>
         <% }) %>
     </div>

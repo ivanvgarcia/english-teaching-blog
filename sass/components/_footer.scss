@@ -1,0 +1,40 @@
+.footer {
+    background: $primary-color-dark;
+    color: #fff;
+
+    &__content {
+        display: flex;
+    }
+
+    &__newsletter {
+        flex: 20%;
+    }
+
+    &__right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        flex: 50%;
+    }
+
+    &__icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        font-size: 6rem;
+    }
+
+    &__link {
+        display: flex;
+    }
+
+    &__item:link,
+    &__item:visited {
+        color: #fff;
+        font-size: 1.8rem;
+        padding: 2rem;
+    }
+}

@@ -1,15 +1,10 @@
-html {
-    font-size: 62.5%;
-}
-
-body {
-    font-size: 1.6rem;
-    font-family: 'Scope One', serif;
-}
-
-a {
-    text-decoration: none;
-}
+@import 'components/settings';
+@import 'components/header';
+@import 'components/cards';
+@import 'components/input-fields';
+@import 'components/footer';
+@import 'components/utilities';
+@import 'components/buttons';
 
 .container {
     max-width: 120rem;
@@ -147,6 +142,11 @@ LANDING PAGE
     margin-right: 2rem;
 }
 
+.post-search {
+    width: 40%;
+    margin: 0 auto;
+}
+
 @keyframes ripple {
     0% {
         transform: scale(0);
@@ -270,11 +270,11 @@ NAV PAGE
 }
 
 .success {
-    background: rgb(0, 156, 148);
+    background: $tertiary-color-dark;
 }
 
 .error {
-    background: rgb(236, 18, 101);
+    background: rgb(255, 0, 0);
 }
 
 @keyframes slidein {
@@ -298,7 +298,3 @@ NAV PAGE
         transform-origin: 0%;
     }
 }
-
-@import 'components/settings';
-@import 'components/header';
-@import 'components/cards';

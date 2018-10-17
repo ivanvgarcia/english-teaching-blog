@@ -1,37 +1,37 @@
 <% include ./partials/header %>
 
-<div id="login-form" class="ui middle aligned center aligned grid">
-  <div id="register-form" class="column">
-    <h2 class="ui image header">
-      <div class="content">
+<div class="container margin-top-bottom">
+  <div class="">
+    <h1 class="">
+      <div class="center-heading">
         Log in to your account
       </div>
-    </h2>
-    <form action="/login" method="post" class="ui large form">
-      <div class="ui stacked secondary  segment">
+    </h1>
+    <form action="/login" method="post" class="form">
+      <div class="">
         <div class="field">
-          <div class="ui left icon input">
-            <i class="user icon"></i>
+
+            <i class="fas fa-user form__icon"></i>
             <input type="text" name="username" placeholder="Username">
-          </div>
+
         </div>
         <div class="field">
-          <div class="ui left icon input">
-            <i class="lock icon"></i>
+   
+            <i class="fas fa-lock form__icon"></i>
             <input type="password" name="password" placeholder="Password">
-          </div>
+
         </div>
-        <input type="submit" value="Login" id="btn" class="ui fluid large teal submit button">
+        <input type="submit" value="Login" id="btn" class="">
       </div>
 
       <div class="ui error message"></div>
 
     </form>
 
-    <div class="ui message">
+    <div class="">
       Don't have an account? <a href="/register">Sign up</a>
     </div>
-    <div class="ui message">
+    <div class="">
       Forgot your password? <a href="/forgot">Reset password</a>
     </div>
   </div>

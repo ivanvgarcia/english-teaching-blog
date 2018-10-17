@@ -11,7 +11,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,900" rel="stylesheet">
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
         crossorigin="anonymous">
 
@@ -92,14 +94,14 @@
 
         <% if(error && error.length > 0) { %>
         <div class="error flash-message">
-            <div class="header">
+            <div class="flash">
                 <%= error %>
             </div>
         </div>
         <% } %>
         <% if(success && success.length > 0) { %>
         <div class="success flash-message">
-            <div class="header">
+            <div class="flash">
                 <%= success %>
             </div>
         </div>
