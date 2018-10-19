@@ -1,14 +1,17 @@
 <% include ../partials/header %>
 
-    <div id="post-container" class="ui main text container">
-        
-        <div id="blog-post" class="ui top attached">
-            <div class="item">
-                <div class="content post">
+    <%= blog %>
+    <header class="post-header">
+        <img class="" src="<%= blog.image %>">
+    </h>
+    <div class="container">
+        <div class="">
+            <div class="">
+                <div class="">
                     <h1 class="post-title"><%= blog.title %></h1> <a href="/users/<%= blog.author.id %>" class="post-author">by <%= blog.author.username %></a>
                     <p class="post-date">Created <%= moment(blog.created).fromNow() %></p>
                 </div>
-                <img id="post-image" class="ui centered rounded image" src="<%= blog.image %>">
+                
 
                 <div class="description">
                     <p><%- blog.body %></p>

@@ -9,7 +9,8 @@ var blogSchema = new mongoose.Schema({
       ref: "User"
     },
     username: String,
-    avatar: String
+    avatar: String,
+    posts: String
   },
   level: String,
   image: String,

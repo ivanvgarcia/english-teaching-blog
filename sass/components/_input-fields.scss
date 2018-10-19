@@ -38,13 +38,20 @@ input[type=submit]:hover {
     border-radius: .3rem;
     padding: 3rem;
     max-width: 40rem;
-    margin: 5rem auto 10rem;
+    margin: 5rem auto;
     box-shadow: 0 .5rem .4rem #ccc;
 
     input {
         margin: 0;
         border-radius: 0;
-        padding-left: .3rem;
+        padding-left: 1rem;
+    }
+
+    &__field {
+        display: flex;
+        margin: 2rem 0;
+        align-items: center;
+        background: $tertiary-color;
     }
 
     &__icon {
@@ -54,9 +61,41 @@ input[type=submit]:hover {
     }
 }
 
-.field {
+#post-form {
+    max-width: 70%;
+
+    input {
+        margin: 1rem 0;
+    }
+}
+
+
+
+.form-message {
+    border: solid .1rem rgb(202, 202, 202);
+    border-radius: .3rem;
+    padding: 1rem 3rem;
+    max-width: 40rem;
+    margin: 1rem auto;
+    box-shadow: 0 .2rem .4rem #ccc;
     display: flex;
-    margin: 2rem 0;
+    justify-content: space-between;
     align-items: center;
-    background: $tertiary-color;
+    font-size: 1.4rem;
+
+    & .btn:link,
+    & .btn:visited {
+        background: $primary-color;
+        width: 30%;
+        margin-left: 1rem;
+        font-size: 1.4rem;
+        padding: 1rem;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    & .btn:hover {
+        background: $primary-color-dark;
+    }
+
 }

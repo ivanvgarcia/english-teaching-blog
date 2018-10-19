@@ -13,14 +13,11 @@ html {
 body {
     font-size: 1.6rem;
     font-family: 'Poppins', serif;
+    boz-sizing: border-box;
 }
 
 a:link,
 a:visited {
     text-decoration: none;
     transition: all .2s ease-out;
-}
-
-a:hover {
-    text-decoration: underline;
 }

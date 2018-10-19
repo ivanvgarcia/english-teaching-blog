@@ -4,18 +4,16 @@
 
     &__content {
         display: flex;
+        justify-content: space-between;
     }
 
-    &__newsletter {
-        flex: 20%;
-    }
+    &__newsletter {}
 
     &__right {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        flex: 50%;
     }
 
     &__icon {

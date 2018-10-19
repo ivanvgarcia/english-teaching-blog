@@ -1,21 +1,21 @@
 <% include ./partials/header %>
 
 <div class="container margin-top-bottom">
-  <div class="">
-    <h1 class="">
-      <div class="center-heading">
+
+    <h1 class="center-heading">
+
         Log in to your account
-      </div>
+
     </h1>
     <form action="/login" method="post" class="form">
       <div class="">
-        <div class="field">
+        <div class="form__field">
 
             <i class="fas fa-user form__icon"></i>
-            <input type="text" name="username" placeholder="Username">
+            <input type="text" name="username" placeholder="Username" autofocus>
 
         </div>
-        <div class="field">
+        <div class="form__field">
    
             <i class="fas fa-lock form__icon"></i>
             <input type="password" name="password" placeholder="Password">
@@ -28,13 +28,13 @@
 
     </form>
 
-    <div class="">
-      Don't have an account? <a href="/register">Sign up</a>
+    <div class="form-message">
+      Don't have an account? <a class="btn" href="/register">Sign up</a>
     </div>
-    <div class="">
-      Forgot your password? <a href="/forgot">Reset password</a>
+    <div class="form-message">
+      Forgot your password? <a class="btn" href="/forgot">Reset password</a>
     </div>
-  </div>
+
 </div>
 
 <% include ./partials/footer %>

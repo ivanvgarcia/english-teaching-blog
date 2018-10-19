@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var sanitizeHtml = require("sanitize-html");
 var Blog = require("../models/blog");
+var User = require("../models/user");
 var middleware = require("../middleware");
 var dotenv = require("dotenv").config();
 var multer = require("multer");
@@ -103,12 +104,17 @@ router.post("/blogs", middleware.isLoggedIn, upload.single("image"), function(
     }
     Blog.create(req.body.blog, function(err, newBlog) {
       if (err) {
+        req.flash("error", "Sorry, there was an error adding your post.");
         res.render("posts/new");
       } else {
         newBlog.author.id = req.user._id;
         newBlog.author.username = req.user.username;
         newBlog.author.avatar = req.user.avatar;
         newBlog.save();
+        User.findById(req.user.id, (err, foundUser) => {
+          foundUser.posts.push(newBlog);
+          foundUser.save();
+        });
         res.redirect("/blogs");
       }
     });
@@ -124,7 +130,16 @@ router.get("/blogs/:id", function(req, res) {
         req.flash("error", "Blog was not found");
         res.redirect("back");
       } else {
-        res.render("posts/show", { blog: foundBlog });
+        User.findOne(foundBlog.author.id)
+          .populate("posts")
+          .exec((err, user) => {
+            if (err) {
+              req.flash("Sorry, this post cannot be found");
+              res.redirect("/");
+            } else {
+              res.render("posts/show", { blog: foundBlog, user });
+            }
+          });
       }
     });
 });
