@@ -4,7 +4,7 @@ $primary-color-dark: #0E6E5E;
 $secondary-color: #6E2203;
 $secondary-color-light: #BB542B;
 $tertiary-color-dark: #b305b6;
-$tertiary-color: #C441C6;
+$tertiary-color: rgb(205, 94, 207);
 
 html {
     font-size: 62.5%;
@@ -13,7 +13,7 @@ html {
 body {
     font-size: 1.6rem;
     font-family: 'Poppins', serif;
-    boz-sizing: border-box;
+    box-sizing: border-box;
 }
 
 a:link,

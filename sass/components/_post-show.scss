@@ -1,0 +1,239 @@
+.post-header {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to right, rgb(126, 126, 126), rgb(68, 68, 68));
+    flex-wrap: wrap;
+
+    &__heading {
+        position: relative;
+    }
+
+    & .overlay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        color: #fff;
+        font-weight: 100;
+        background: rgba($secondary-color-light, .6);
+        text-align: center;
+    }
+
+    &__author-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-width: 60rem;
+        background: $primary-color;
+        background-size: cover;
+    }
+
+    &__image {
+        width: 60rem;
+
+    }
+
+    &__avatar {
+        width: 8rem;
+        border-radius: 50%;
+        border: .1rem #fff solid;
+    }
+
+    &__name {
+        color: #fff;
+        font-size: 2rem;
+        font-weight: 100;
+        margin: 2rem 0;
+    }
+
+    &__name:hover {
+        text-decoration: underline;
+        transform: translateY(-.3rem);
+    }
+
+    &__date {
+        color: #fff;
+    }
+}
+
+.post-body {
+    display: flex;
+    margin: 0 auto;
+    flex-wrap: wrap;
+
+    &__description {
+        flex: 60%;
+        margin-right: 2rem;
+    }
+
+    & p {
+        line-height: 2.8rem;
+        letter-spacing: .2;
+
+        font-size: 1.8rem;
+    }
+
+    & h2 {
+        font-weight: 100;
+        color: $primary-color;
+        text-transform: uppercase;
+    }
+
+    & a {
+        color: $tertiary-color-dark;
+        text-decoration: underline;
+    }
+
+    & strong {
+        background: $tertiary-color;
+        color: #fff;
+        padding: 0 1rem;
+        margin-right: .3rem;
+        border-radius: .3rem;
+    }
+
+    &__delete-form {
+        display: inline;
+        margin: 0;
+        width: 8rem;
+    }
+}
+
+
+
+.sidebar {
+    flex: 20%;
+    align-self: flex-start;
+
+    &__cta {
+        margin-bottom: 5rem;
+    }
+
+    &__content {
+        background: $tertiary-color;
+        padding: 1rem;
+    }
+
+    &__heading {
+        font-size: 2.5rem;
+        font-weight: 100;
+        text-align: center;
+        margin: .5rem;
+        color: #fff;
+    }
+
+    &__recent-posts {
+        color: #fff;
+        background: $tertiary-color-dark;
+        display: block;
+        padding: 1rem;
+        margin: 1rem 0;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__recent-posts::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 10%;
+        width: 0;
+        background: #fff;
+        transition: width .3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    &__recent-posts:hover::after {
+        width: 100%;
+    }
+
+    &__title:link,
+    &__title:visited {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    &__title:hover {
+        text-decoration: underline;
+        color: #fff !important;
+    }
+
+    &__newsletter {
+        background: $primary-color;
+        padding: 1rem 0;
+        color: #fff;
+
+        h2 {
+            color: #fff;
+        }
+
+        & input {
+            width: 80%;
+        }
+    }
+}
+
+.comment {
+    margin-bottom: 2rem;
+
+    &__user {
+        display: flex;
+        align-items: center;
+
+    }
+
+    &__avatar {
+        border-radius: 50%;
+        width: 5rem;
+    }
+
+    &__body {
+        display: flex;
+        align-items: center;
+        background: rgb(226, 226, 226);
+        border-radius: 10rem;
+        padding: 1rem;
+        text-wrap: wrap;
+        max-width: 80rem;
+    }
+
+    &__author {
+        font-weight: 600;
+        color: $primary-color;
+    }
+
+    &__author:hover {
+        text-decoration: underline;
+    }
+
+    &__text {
+        margin: 0;
+        font-weight: 100;
+    }
+
+    &__avatar,
+    &__author {
+        margin-right: 1rem;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        margin-left: 7rem;
+        margin-top: 1rem;
+    }
+
+    &__form {
+        margin: 0;
+    }
+
+
+}
