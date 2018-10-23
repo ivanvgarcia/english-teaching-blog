@@ -26,10 +26,34 @@ body {
 
 }
 
+
 a:link,
 a:visited {
     text-decoration: none;
     transition: all 0.2s ease-out;
+}
+
+.container {
+    max-width: 120rem;
+    margin: 0 auto;
+
+    @include respond(desktop) {
+        max-width: 100rem;
+    }
+
+    @include respond(desktop) {
+        max-width: 80rem;
+    }
+}
+
+.site {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+#site-content {
+    flex: 1;
 }
 
 .form,
