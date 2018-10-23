@@ -58,6 +58,10 @@ input[type=submit]:hover {
         width: 10%;
         text-align: center;
         color: #fff;
+
+        @include respond(phone) {
+            padding: 0 1rem;
+        }
     }
 }
 

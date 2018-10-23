@@ -1,13 +1,13 @@
 <% include ../partials/header %>
 
-    <div class="ui main text container segment">
-        <div class="ui huge header">Add New Comment to <%= blog.title %></div>
-        <form class="ui form" action="/blogs/<%= blog._id %>/comments" method="POST" required>
+    <div class="container margin-top-bottom">
+        <h1 class="center-heading">Add New Comment to <%= blog.title %></h1>
+        <form class="" action="/blogs/<%= blog._id %>/comments" method="POST" required>
             <div class="field">
                 <label>Text</label>
                 <input type="text" name="comment[text]" placeholder="text" required>
             </div>
-            <input id="btn" class="ui teal button" value="Submit" type="submit">
+            <input id="btn" value="Submit" type="submit">
         </form>
     </div>
     

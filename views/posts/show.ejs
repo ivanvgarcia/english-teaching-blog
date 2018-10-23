@@ -22,15 +22,59 @@
         <div class="post-body__description">
             <% if(currentUser && blog.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
             <div class="post-body__action-buttons">
-                <a class="post-body__action-btn" href="/blogs/<%= blog._id %>/edit"><i class="fas fa-edit"></i>Edit</a>
+                <a class="btn" href="/blogs/<%= blog._id %>/edit"><i class="fas fa-edit"></i>Edit</a>
                 <form class="post-body__delete-form" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
-                    <button class="post-body__action-btn"><i class="fas fa-trash-alt"></i>Delete</button>
+                    <button class="btn btn--delete"><i class="fas fa-trash-alt"></i>Delete</button>
                 </form>
             </div>
             <% } %>
             <p class="post-body__paragraph">
                 <%- blog.body %>
             </p>
+            <div class="comments margin-top-bottom--small">
+                <h2 class="comments__heading center-heading">Comments</h2>
+                <% blog.comments.forEach(function(comment){ %>
+                <div class="comment">
+                    <div class="comment__content">
+                        <div class="comment__user">
+                            <% if (comment.author.avatar) { %>
+                            <a href="/users/<%= comment.author.id %>">
+                                <img class="comment__avatar" src="<%= comment.author.avatar %>" alt="photo">
+                            </a>
+                            <% } else { %>
+                            <a href="/users/<%= comment.author.id %>">
+                                <img class="comment__avatar" src="/img/nophoto.png">
+                            </a>
+                            <% } %>
+                            <div class="comment__body">
+                                <a href="/users/<%= comment.author.id %>" class="comment__author" alt="photo">
+                                    <%= comment.author.username %>
+                                </a>
+                                <p class="comment__text">
+                                    <%= comment.text %>
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="comment__actions">
+                            <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                            <a class="comment__action-btn" href="/blogs/<%= blog._id %>/comments/<%= comment._id %>/edit"><i
+                                    class="fas fa-edit"></i>Edit</a>
+                            <form class="comment__form" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>?_method=DELETE"
+                                method="POST">
+                                <button class="comment__action-btn"><i class="fas fa-trash-alt"></i>Delete</button>
+                            </form>
+                            <% } %>
+                            <small class="comment__date">Posted
+                                <%= moment(comment.created).fromNow() %></small>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+                <a id="btn" href="/blogs/<%= blog._id %>/comments/new" class="ui primary submit labeled icon button">
+                    <i class="fas fa-edit"></i> Add Comment
+                </a>
+            </div>
         </div>
 
         <div class="sidebar">
@@ -90,49 +134,12 @@
                         </div>
                     </form>
                 </div>
-
                 <!--End mc_embed_signup-->
             </div>
         </div>
     </div>
 </div>
 
-<div class="comments container margin-top-bottom">
-    <h2 class="comments__heading center-heading">Comments</h2>
-    <% blog.comments.forEach(function(comment){ %>
-    <div class="comment">
-        <div class="comment__content">
-            <div class="comment__user">
-                <img class="comment__avatar" src="<%=user.avatar %>"" alt=" photo">
-                <div class="comment__body">
-                    <a href="/users/<%= comment.author.id %>" class="comment__author">
-                        <%= comment.author.username %>
-                    </a>
-                    <p class="comment__text">
-                        <%= comment.text %>
-                    </p>
-                </div>
-
-            </div>
-            <div class="comment__actions">
-                <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
-                <a class="comment__action-btn" href="/blogs/<%= blog._id %>/comments/<%= comment._id %>/edit"><i class="fas fa-edit"></i>Edit</a>
-                <form class="comment__form" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>?_method=DELETE"
-                    method="POST">
-                    <button class="comment__action-btn"><i class="fas fa-trash-alt"></i>Delete</button>
-                </form>
-                <% } %>
-                <small class="comment__date">Posted
-                    <%= moment(comment.created).fromNow() %></small>
-            </div>
-        </div>
-    </div>
-    <% }) %>
-    <a id="btn" href="/blogs/<%= blog._id %>/comments/new" class="ui primary submit labeled icon button">
-        <i class="fas fa-edit"></i> Add Comment
-    </a>
-</div>
-</div>
 
 
 

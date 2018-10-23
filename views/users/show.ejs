@@ -2,58 +2,147 @@
 
 
 
-<div class="user-profile">
-  <div id="user-card" class="ui grid container centered stackable">
-    <div class="six wide column">
-      <div class="ui medium circular image">
-        <img src="<%= user.avatar %>">
-      </div>
-    </div>
-
-    <div class="six wide column">
-      <h2 id="user-name" class="ui header">
-        <%= user.firstName + " " + user.lastName %>
-      </h2>
-      <% if (user.isAdmin === true) { %>
-      <h3 id="user-info" class="ui dividing header">Teacher and Blogger</h3>
-      <div id="user-content" class="ui segments">
-        <h4>Check out
-          <%= user.firstName %>'s Posts</h4>
-        <% blogPosts.forEach(function(blogPost) { %>
-        <div class="ui teal segment">
-          <a href="/blogs/<%= blogPost.id %>">
-            <%= blogPost.title %></a>
-        </div>
-        <% }) %>
-      </div>
-      <% if (currentUser && currentUser._id.toString() === user.id) { %>
-        <form class="comment-form" action="/users/<%= user.id  %>?_method=DELETE" method="POST">
-          <input type="submit" class="comment-btn" value="Delete">
-        </form>
-      <% } %>
+<div class="user-information container margin-top-bottom">
+  <div class="user">
+    <% if (user.avatar) { %>
+    <img class="user__avatar" src="<%= user.avatar %>">
+    <% } else { %>
+    <img class="user__avatar" src="/img/nophoto.png">
+    <% } %>
+    <h2 class="user__name">
+      <% if (user.firstName || user.lastName) { %>
+      <%= user.firstName + " " + user.lastName %>
       <% } else { %>
-      <h3 id="user-info" class="ui dividing header">Simply English Learner</h3>
-      <div id="user-content" class="ui segments">
-        <h4>Check out
-          <%= user.firstName %>'s Comments</h4>
-        <% comments.forEach(function(comment, i) { %>
-        <div class="ui teal segment">
-          <a>
-            <%= comment.text %></a>
+      <%= user.username %>
+      <% } %>
+    </h2>
+    <small>
+      Member since
+      <%= moment(user.memberSince).fromNow() %>
+    </small>
+    <% if (currentUser && currentUser._id.toString() === user.id) { %>
+    <div class="user__actions">
+      <a href="/edit/<%= user.id %>" class="btn">
+        Edit
+      </a>
+      <form class="user__form" action="/users/<%= user.id  %>?_method=DELETE" method="POST">
+        <button class="btn btn--delete">Delete</button>
+      </form>
+    </div>
+    <% } %>
+  </div>
+
+  <% if (user.isAdmin) { %>
+  <div class="post-list">
+    <h1 class="center-heading post-list__heading">
+      <% if (user.firstName || user.lastName) { %>
+      <%= user.firstName + " " + user.lastName %>'s Posts
+      <% } else { %>
+      <%= user.username %>'s Posts
+      <% } %>
+    </h1>
+    <div class="post-list__table">
+      <div class="post-list__row">
+        <div class="post-list__th post-list__cell">
+          Title
         </div>
-        <% }) %>
-      </div>
-        <% if (currentUser && currentUser._id.toString() === user.id) { %>
-          <form class="comment-form" action="/users/<%= user.id  %>?_method=DELETE" method="POST">
-            <input type="submit" class="comment-btn" value="Delete">
-          </form>
+        <div class="post-list__th post-list__cell">
+          Level
+        </div>
+        <div class="post-list__th post-list__cell">
+          Image
+        </div>
+        <div class="post-list__th post-list__cell">
+          Date Created
+        </div>
+        <div class="post-list__th post-list__cell">
+
+        </div>
+           <% if (currentUser && currentUser._id.toString() === user.id) { %>
+        <div class="post-list__th post-list__cell">
+
+        </div>
         <% } %>
+      </div>
+      <% if (blogPosts.length > 0) { %>
+      <% blogPosts.forEach(post => { %>
+      <div class="post-list__row">
+        <div class="post-list__cell">
+          <%= post.title %>
+        </div>
+        <div class="post-list__cell post-list__cell--middle">
+          <%= post.level %>
+        </div>
+        <div class="post-list__cell post-list__cell--middle">
+          <img src="<%= post.image %>" class="post-list__image">
+        </div>
+        <div class="post-list__cell post-list__cell--middle">
+          <%= moment(post.created).format("MMMM DD, YYYY") %>
+        </div>
+        <% if (currentUser && currentUser._id.toString() === user.id) { %>
+        <div class="post-list__cell post-list__cell--middle">
+          <a href="/blogs/<%= post.id %>/edit" class="btn" disabled><i class="fas fa-edit"></i>Edit</a>
+        </div>
+        <div class="post-list__cell post-list__cell--middle">
+          <form class="post-list__form" action="/blogs/<%= post._id %>?_method=DELETE" method="POST">
+            <button class="btn btn--delete"><i class="fas fa-trash-alt"></i>Delete</button>
+          </form>
+        </div>
+        <% } else { %>
+        <div class="post-list__cell post-list__cell--middle">
+          <a href="/blogs/<%= post.id %>" class="btn"><i class="fas fa-book-open"></i>Read</a>
+        </div>
+        <% } %>
+      </div>
+      <% }) %>
+      <% } else if (blogPosts.length === 0) { %>
+      <div class="post-list__row">
+        <div class="post-list__cell post-list__cell--middle">
+          This user has not created any posts.
+        </div>
+      </div>
       <% } %>
     </div>
   </div>
-</div>
-</div>
+  <% } %>
 
+  <div class="comment-list">
+    <h1 class="center-heading comment-list__heading">
+      <% if (user.firstName || user.lastName) { %>
+      <%= user.firstName + " " + user.lastName %>'s Comments
+      <% } else { %>
+      <%= user.username %>'s Comments
+      <% } %>
+    </h1>
+    <div class="comment-list__table">
+      <div class="comment-list__row">
+        <div class="comment-list__th comment-list__cell">
+          Comment Text
+        </div>
+        <div class="comment-list__th comment-list__cell">
+          Created
+        </div>
+        <div class="comment-list__th comment-list__cell">
+ 
+        </div>
+      </div>
+      <% comments.forEach(function(comment, i) { %>
+      <div class="comment-list__row">
+        <div class="comment-list__cell">
+          <a class="comment-list__link" href="/blogs/<%= comment.post.id %>">
+            <%= comment.text %></a>
+        </div>
+        <div class="comment-list__cell  comment-list__cell--middle">
+          <%= moment(comment.created).fromNow() %>
+        </div>
+        <div class="comment-list__cell  comment-list__cell--middle">
+          <a href="/blogs/<%= comment.post.id %>" class="btn"><i class="fas fa-book-open"></i>Read</a>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
 
+</div>
 
 <% include ../partials/footer %>

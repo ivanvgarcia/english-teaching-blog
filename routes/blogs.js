@@ -6,6 +6,7 @@ var User = require("../models/user");
 var middleware = require("../middleware");
 var dotenv = require("dotenv").config();
 var multer = require("multer");
+var mongoose = require("mongoose");
 var storage = multer.diskStorage({
   filename: function(req, file, callback) {
     callback(null, Date.now() + file.originalname);
@@ -115,6 +116,7 @@ router.post("/blogs", middleware.isLoggedIn, upload.single("image"), function(
           foundUser.posts.push(newBlog);
           foundUser.save();
         });
+        req.flash("success", "Your new post has been created!");
         res.redirect("/blogs");
       }
     });
@@ -127,8 +129,8 @@ router.get("/blogs/:id", function(req, res) {
     .populate("comments")
     .exec(function(err, foundBlog) {
       if (err || !foundBlog) {
-        req.flash("error", "Blog was not found");
-        res.redirect("back");
+        req.flash("error", "Post was not found");
+        res.redirect("/blogs");
       } else {
         User.findOne(foundBlog.author.id)
           .populate("posts")
@@ -181,7 +183,6 @@ router.put(
             return res.redirect("back");
           }
         }
-        updatedBlog.author.avatar = req.user.avatar;
         updatedBlog.title = req.body.blog.title;
         updatedBlog.level = req.body.blog.level;
         updatedBlog.body = req.body.blog.body;
@@ -201,10 +202,15 @@ router.delete("/blogs/:id", middleware.checkBlogOwnership, function(req, res) {
       return res.redirect("/blogs");
     }
     try {
+      User.findById(req.user.id, (err, foundUser) => {
+        deleteUserPost = mongoose.Types.ObjectId(blogToDelete.id);
+        remove(foundUser.posts, deleteUserPost);
+        foundUser.save();
+      });
       await cloudinary.v2.uploader.destroy(blogToDelete.imageId);
       blogToDelete.remove();
       req.flash("success", "The blog post has been deleted!");
-      res.redirect("/blogs");
+      res.redirect(`/users/${blogToDelete.author.id}`);
     } catch (err) {
       if (err) {
         req.flash("error", err.message);
@@ -217,6 +223,11 @@ router.delete("/blogs/:id", middleware.checkBlogOwnership, function(req, res) {
 
 function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
+
+function remove(array, element) {
+  const index = array.indexOf(element);
+  array.splice(index, 1);
 }
 
 module.exports = router;

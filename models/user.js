@@ -5,8 +5,9 @@ var userSchema = new mongoose.Schema({
   username: { type: String, unique: true, required: true, trim: true },
   password: { type: String },
   avatar: String,
-  firstName: { type: String, required: [true, "Please enter your first name"] },
-  lastName: { type: String, required: [true, "Please enter your last name"] },
+  description: String,
+  firstName: { type: String },
+  lastName: { type: String },
   email: {
     type: String,
     unique: true,
@@ -20,7 +21,8 @@ var userSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Blog"
     }
-  ]
+  ],
+  memberSince: { type: Date, default: Date.now }
 });
 
 userSchema.plugin(passportLocalMongoose);

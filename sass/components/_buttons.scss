@@ -1,17 +1,49 @@
-.btn:link,
-.btn:visited {
-    position: relative;
-    border: none;
-    padding: 1.8rem;
+.btn,
+.post-body__action-buttons .btn:link,
+.post-body__action-buttons .btn:visited {
     color: #fff;
-    background: rgba(187, 10, 81, 0.986);
+    border: none;
+    background: $primary-color;
     font-size: 1.8rem;
+    width: 9rem;
+    display: inline-block;
+    padding: 1rem 0;
     cursor: pointer;
-    overflow: hidden;
-    outline: none;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
 }
 
-.post-body__action-btn:not(:active)::before,
+.btn--delete {
+    background: #ff0000;
+    position: relative;
+}
+
+.btn--delete:hover {
+    background: #ff0000;
+}
+
+.btn--delete:hover::after {
+    background: #aa0000;
+}
+
+.btn::after,
+.btn--delete::after {
+    content: "";
+    position: absolute;
+    height: 10%;
+    width: 0;
+    top: 0;
+    left: 0;
+    background: $primary-color-dark;
+    transition: width .3s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.btn:hover::after,
+.btn--delete:hover::after {
+    width: 100%;
+}
+
 .btn::before {
     content: '';
     position: absolute;
@@ -24,24 +56,16 @@
     background: $primary-color-dark;
 }
 
-.post-body__action-btn:not(:active)::before,
 .btn:not(:active)::before {
     animation: ripple 1s ease-out;
 }
 
-.post-body__action-btn:before,
 .btn:before {
     visibility: hidden;
 }
 
-.post-body__action-btn:focus:before,
 .btn:focus:before {
     visibility: visible;
-}
-
-.btn:hover {
-    background: $primary-color;
-    color: #fff;
 }
 
 .btn:not(:last-of-type) {
@@ -80,38 +104,6 @@
     }
 }
 
-.post-body {
-    &__action-buttons &__action-btn {
-        position: relative;
-        display: inline-block;
-        text-align: center;
-        border: none;
-        background: $primary-color;
-        color: #fff;
-        text-decoration: none;
-        font-size: 1.8rem;
-        width: 9rem;
-        padding: 1rem 0;
-        cursor: pointer;
-
-    }
-
-    &__action-btn::after {
-        content: "";
-        position: absolute;
-        height: 10%;
-        width: 0;
-        top: 0;
-        left: 0;
-        background: $primary-color-dark;
-        transition: width .3s cubic-bezier(0.23, 1, 0.320, 1);
-    }
-
-    &__action-btn:hover::after {
-        width: 100%;
-    }
-}
-
 .comments .comment .comment__actions .comment__action-btn {
     display: inline-block;
     color: $primary-color;
@@ -123,6 +115,7 @@
     width: auto;
     height: auto;
     text-transform: lowercase;
+    text-decoration: none;
     border: none;
     cursor: pointer;
 }
@@ -132,6 +125,6 @@
     color: $primary-color;
 }
 
-i {
+.btn i {
     margin-right: .5rem;
 }

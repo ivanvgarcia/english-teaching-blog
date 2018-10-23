@@ -1,0 +1,166 @@
+/*****************
+NAV PAGE
+*****************/
+
+.nav {
+    display: flex;
+    box-shadow: 0 1px 2px rgb(206, 206, 206);
+
+    @include respond(phone) {
+        display: none;
+    }
+}
+
+.nav__logor {
+    flex: 50%;
+    text-align: center;
+    font-size: 2rem;
+
+    justify-self: center;
+    align-self: center;
+}
+
+.nav__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 25%;
+}
+
+.nav__item {
+    display: flex;
+    align-items: center;
+}
+
+.nav__item a {
+    position: relative;
+    color: rgb(53, 53, 53);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+    text-transform: uppercase;
+    line-height: 40px;
+    transition: background 0.1s ease-out;
+}
+
+.nav__item a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0.2rem;
+    background: rgba(236, 18, 102, 0.986);
+    transform: translateY(0);
+    color: #fff;
+    opacity: 0;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav__item a:hover::after {
+    transform: translateY(-10px);
+    opacity: 1;
+}
+
+.nav__item i {
+    color: rgba(236, 18, 102, 0.986);
+    margin-right: 0.8rem;
+    font-size: 2rem;
+}
+
+.flash-message {
+    color: #fff;
+    transform: translateX(-100%);
+    width: 20%;
+    padding: 1rem;
+    animation: slidein 2.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    text-align: center;
+    position: absolute;
+    top: 8rem;
+    left: 0;
+    z-index: 100;
+    border-top: 0.3rem solid rgb(58, 58, 58);
+    opacity: 1;
+
+    @include respond(phone) {
+        width: 50%;
+    }
+}
+
+.success {
+    background: $tertiary-color-dark;
+}
+
+.error {
+    background: rgb(255, 0, 0);
+}
+
+.mobile-nav {
+    display: none;
+
+    @include respond(phone) {
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        width: 100%;
+        background: $tertiary-color-dark;
+        bottom: 0;
+        box-shadow: 0 -.4rem 1rem rgb(75, 75, 75);
+        z-index: 9999;
+    }
+
+    &__logo {
+        text-align: center;
+        font-size: 4rem;
+        color: #fff;
+        justify-self: center;
+        align-self: center;
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex: 25%;
+    }
+
+    &__list--left {
+        justify-content: flex-start;
+    }
+
+    &__list--right {
+        justify-content: flex-end;
+    }
+
+    &__item a {
+        position: relative;
+        font-size: 3.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        background: $tertiary-color;
+        padding: 1rem;
+        text-transform: uppercase;
+        line-height: 40px;
+        border: $tertiary-color .1rem solid;
+    }
+
+    &__avatar {
+        background: $tertiary-color;
+        width: 4.2rem;
+        border-radius: 50%;
+    }
+}
+
+.mobile-nav__item .mobile-nav__link {
+    background: $tertiary-color-dark;
+    border: none;
+}

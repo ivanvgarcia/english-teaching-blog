@@ -4,8 +4,17 @@
     background: linear-gradient(to right, rgb(126, 126, 126), rgb(68, 68, 68));
     flex-wrap: wrap;
 
+
+    @include respond(phone) {}
+
     &__heading {
         position: relative;
+        width: 50%;
+        flex: 1;
+
+        @include respond(phone) {
+            flex: 1 100%;
+        }
     }
 
     & .overlay {
@@ -29,13 +38,19 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        min-width: 60rem;
         background: $primary-color;
-        background-size: cover;
+        width: 50%;
+        flex: 1;
+
+        @include respond(phone) {
+            padding: 2rem 0;
+            background: $secondary-color;
+            width: 100%;
+        }
     }
 
     &__image {
-        width: 60rem;
+        width: 100%;
 
     }
 
@@ -70,6 +85,12 @@
     &__description {
         flex: 60%;
         margin-right: 2rem;
+
+        @include respond(phone) {
+            flex: 90%;
+            padding: 0 1rem;
+            margin-right: 0;
+        }
     }
 
     & p {
@@ -110,6 +131,10 @@
 .sidebar {
     flex: 20%;
     align-self: flex-start;
+
+    @include respond(phone) {
+        padding: 0 1rem;
+    }
 
     &__cta {
         margin-bottom: 5rem;
@@ -171,6 +196,10 @@
         padding: 1rem 0;
         color: #fff;
 
+        @include respond(phone) {
+            display: none;
+        }
+
         h2 {
             color: #fff;
         }
@@ -187,12 +216,12 @@
     &__user {
         display: flex;
         align-items: center;
-
+        margin-bottom: .5rem;
     }
 
     &__avatar {
         border-radius: 50%;
-        width: 5rem;
+        width: 4rem;
     }
 
     &__body {
@@ -200,23 +229,25 @@
         align-items: center;
         background: rgb(226, 226, 226);
         border-radius: 10rem;
-        padding: 1rem;
+        padding: 0 1rem;
         text-wrap: wrap;
-        max-width: 80rem;
+        max-width: 50rem;
     }
 
-    &__author {
+    .comments .comment &__author {
         font-weight: 600;
         color: $primary-color;
+        text-decoration: none;
     }
 
-    &__author:hover {
+    .comments .comment &__author:hover {
         text-decoration: underline;
     }
 
-    &__text {
+    .comments .comment &__text {
         margin: 0;
         font-weight: 100;
+        font-size: 1.6rem;
     }
 
     &__avatar,
@@ -227,8 +258,7 @@
     &__actions {
         display: flex;
         align-items: center;
-        margin-left: 7rem;
-        margin-top: 1rem;
+        margin-left: 6rem;
     }
 
     &__form {

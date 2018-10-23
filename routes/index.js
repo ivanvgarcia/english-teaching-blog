@@ -14,11 +14,11 @@ var middleware = require("../middleware");
 // AUTHENTICATON ROUTES
 //=======================
 
-router.get("/register", function(req, res) {
+router.get("/register", middleware.getRedirected, function(req, res) {
   res.render("register");
 });
 
-router.post("/register", function(req, res) {
+router.post("/register", middleware.getRedirected, function(req, res) {
   var newUser = new User({
     username: req.body.username,
     firstName: req.body.firstName,
@@ -47,11 +47,11 @@ router.post("/register", function(req, res) {
   });
 });
 
-router.get("/login", function(req, res) {
+router.get("/login", middleware.getRedirected, function(req, res) {
   res.render("login");
 });
 
-router.post("/login", function(req, res, next) {
+router.post("/login", middleware.getRedirected, function(req, res, next) {
   passport.authenticate("local", {
     successRedirect: "/blogs",
     failureRedirect: "/login",
@@ -60,7 +60,7 @@ router.post("/login", function(req, res, next) {
   })(req, res);
 });
 
-router.get("/logout", function(req, res) {
+router.get("/logout", middleware.isLoggedIn, function(req, res) {
   req.logout();
   req.flash("success", "You have been logged out!");
   res.redirect("/blogs");
@@ -101,7 +101,7 @@ router.get("/users/:id", function(req, res) {
 });
 
 // Delete
-router.delete("/users/:id", (req, res) => {
+router.delete("/users/:id", middleware.isLoggedIn, (req, res) => {
   if (req.user && req.user._id.toString() === req.params.id) {
     User.findByIdAndRemove({ _id: req.params.id }).then(() => {
       req.flash(

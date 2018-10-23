@@ -1,23 +1,40 @@
-$primary-color: #2BBBA3;
-$primary-color-light: #54FFE3;
-$primary-color-dark: #0E6E5E;
-$secondary-color: #6E2203;
-$secondary-color-light: #BB542B;
+$primary-color: #2bbba3;
+$primary-color-light: #54ffe3;
+$primary-color-dark: #0e6e5e;
+$secondary-color: #6e2203;
+$secondary-color-light: #bb542b;
 $tertiary-color-dark: #b305b6;
 $tertiary-color: rgb(205, 94, 207);
 
 html {
     font-size: 62.5%;
+
+    @include respond(desktop) {
+        font-size: 56.25%;
+    }
+
+    @include respond(tab-port) {
+        font-size: 50%;
+    }
 }
 
 body {
     font-size: 1.6rem;
-    font-family: 'Poppins', serif;
+    font-family: "Poppins", serif;
     box-sizing: border-box;
+
+
 }
 
 a:link,
 a:visited {
     text-decoration: none;
-    transition: all .2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+.form,
+.form-message {
+    @include respond(phone) {
+        width: 80%;
+    }
 }

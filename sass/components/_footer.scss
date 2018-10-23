@@ -2,12 +2,26 @@
     background: $primary-color-dark;
     color: #fff;
 
+
     &__content {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        @include respond(phone) {
+            justify-content: center;
+        }
     }
 
-    &__newsletter {}
+    &__newsletter {
+        width: 30%;
+        margin-right: 15rem;
+
+        @include respond(phone) {
+            width: 80%;
+            margin: 0 auto 6rem;
+        }
+    }
 
     &__right {
         display: flex;
@@ -22,7 +36,12 @@
         justify-content: center;
         align-items: center;
         flex: 1;
-        font-size: 6rem;
+        font-size: 4.5rem;
+
+        @include respond(phone) {
+            font-size: 4rem;
+            margin-bottom: 8rem;
+        }
     }
 
     &__link {
