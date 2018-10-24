@@ -183,7 +183,6 @@ router.put(
             return res.redirect("back");
           }
         }
-        updatedBlog.avatar = req.user.avatar;
         updatedBlog.title = req.body.blog.title;
         updatedBlog.level = req.body.blog.level;
         updatedBlog.body = req.body.blog.body;
