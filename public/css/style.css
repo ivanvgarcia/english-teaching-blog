@@ -257,11 +257,9 @@ NAV PAGE
     color: #2bbba3; }
   .card__date {
     color: #cd5ecf; }
-  .card__content {
-    flex: 1; }
-    @media (max-width: 37.5em) {
-      .card__content {
-        padding: 1rem; } }
+  @media (max-width: 37.5em) {
+    .card__content {
+      padding: 1rem; } }
   .card__body p {
     font-weight: 100;
     font-size: 1.5rem; }
