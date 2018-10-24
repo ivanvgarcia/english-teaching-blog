@@ -12,7 +12,7 @@ NAV PAGE
 }
 
 .nav__logor {
-    flex: 50%;
+    flex: 10%;
     text-align: center;
     font-size: 2rem;
 
@@ -41,7 +41,6 @@ NAV PAGE
     display: flex;
     justify-content: center;
     align-items: center;
-
     padding: 1rem;
     text-transform: uppercase;
     line-height: 40px;
@@ -96,24 +95,21 @@ NAV PAGE
 
 .mobile-nav {
     display: none;
+    padding: 0 1rem;
+    background: $primary-color-dark;
 
     @include respond(phone) {
         display: flex;
         justify-content: center;
         position: fixed;
         width: 100%;
-        background: $tertiary-color-dark;
         bottom: 0;
-        box-shadow: 0 -.4rem 1rem rgb(75, 75, 75);
+        box-shadow: 0 -.1rem .5rem rgb(58, 58, 58);
         z-index: 9999;
     }
 
     &__logo {
-        text-align: center;
-        font-size: 4rem;
-        color: #fff;
-        justify-self: center;
-        align-self: center;
+        display: none;
     }
 
     &__list {
@@ -126,30 +122,27 @@ NAV PAGE
     }
 
     &__list--left {
-        justify-content: flex-start;
+        justify-content: center;
     }
 
     &__list--right {
-        justify-content: flex-end;
+        justify-content: center;
     }
 
     &__item a {
         position: relative;
-        font-size: 3.5rem;
+        font-size: 3rem;
         display: flex;
         justify-content: center;
         align-items: center;
         color: #fff;
-        background: $tertiary-color;
         padding: 1rem;
         text-transform: uppercase;
         line-height: 40px;
-        border: $tertiary-color .1rem solid;
     }
 
     &__avatar {
-        background: $tertiary-color;
-        width: 4.2rem;
+        width: 3rem;
         border-radius: 50%;
     }
 }

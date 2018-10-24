@@ -26,6 +26,10 @@ LANDING PAGE
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    @include respond(phone) {
+        min-height: 100vh;
+    }
 }
 
 .landing__header {
@@ -56,14 +60,22 @@ LANDING PAGE
 
 .landing__heading {
     font-size: 5rem;
-    font-family: inherit;
+    font-weight: 100;
     text-align: center;
     z-index: 1;
+
+    @include respond(phone) {
+        font-size: 3.5rem
+    }
 }
 
 .landing__subtitle {
     text-align: center;
     font-size: 2rem;
+
+    @include respond(phone) {
+        font-size: 1.6rem;
+    }
 }
 
 .landing__heading,

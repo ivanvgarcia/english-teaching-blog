@@ -43,14 +43,20 @@
         <nav class="nav">
             <ul class="nav__list nav__list--left">
                 <li class="nav__item">
-                    <a href="/" class="">
+                    <a href="/">
 
                         Home
                     </a>
                 </li>
                 <li class="nav__item">
+                    <a href="/blogs">
+
+                        Posts
+                    </a>
+                </li>
+                <li class="nav__item">
                     <% if(currentUser && currentUser.isAdmin) { %>
-                    <a href="/blogs/new" class="">
+                    <a href="/blogs/new">
 
                         New Post
                     </a>
@@ -59,7 +65,7 @@
             </ul>
 
             <div class="nav__logor">
-                <i class="">
+                <i>
                 </i>Simply English
             </div>
 
@@ -131,7 +137,7 @@
                 </li>
                 <% } else { %>
                 <li class="mobile-nav__item">
-                    <% if (currentUser.isAdmin) { %>
+                    <% if (currentUser.avatar) { %>
                         <a href="/users/<%= currentUser._id %>" class="mobile-nav__link">
                             <img class="mobile-nav__avatar" src="<%= currentUser.avatar %>">
                         </a>

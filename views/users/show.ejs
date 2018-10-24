@@ -22,9 +22,9 @@
     </small>
     <% if (currentUser && currentUser._id.toString() === user.id) { %>
     <div class="user__actions">
-      <a href="/edit/<%= user.id %>" class="btn">
+      <!-- <a href="/edit/<%= user.id %>" class="btn">
         Edit
-      </a>
+      </a> -->
       <form class="user__form" action="/users/<%= user.id  %>?_method=DELETE" method="POST">
         <button class="btn btn--delete">Delete</button>
       </form>
@@ -58,7 +58,7 @@
         <div class="post-list__th post-list__cell">
 
         </div>
-           <% if (currentUser && currentUser._id.toString() === user.id) { %>
+        <% if (currentUser && currentUser._id.toString() === user.id) { %>
         <div class="post-list__th post-list__cell">
 
         </div>
@@ -123,7 +123,7 @@
           Created
         </div>
         <div class="comment-list__th comment-list__cell">
- 
+
         </div>
       </div>
       <% comments.forEach(function(comment, i) { %>
