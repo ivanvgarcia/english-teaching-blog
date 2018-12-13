@@ -16,6 +16,8 @@ var commentRoutes = require("./routes/comments"),
   blogRoutes = require("./routes/blogs"),
   indexRoutes = require("./routes/index");
 
+var sslRedirect = require("heroku-ssl-redirect");
+
 // APP CONFIG
 app.locals.moment = require("moment");
 var url = process.env.DATABASEURL || process.env.DEVDATABASE;
@@ -25,6 +27,8 @@ mongoose.connect(
     useNewUrlParser: true
   }
 );
+
+app.use(sslRedirect());
 app.set("view engine", "ejs");
 //app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.use(express.static("public"));
